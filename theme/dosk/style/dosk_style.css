@@ -1,0 +1,311 @@
+#adminsettings .form-item .form-description {
+    width: 580px;
+    margin: 0.5em 0 0em 162px;
+}
+
+/* page layout fix */
+body {
+    margin: auto 0px;
+    width: auto;
+}
+
+/* new styles */
+#region-top-1, 
+#region-top-2,
+#region-top-3,
+#region-top-4
+{
+	display: block;
+	float: left;
+}
+
+#region-top div.block, 
+#region-bot div.block {
+	width: 238px;
+	margin: 0 auto;
+	display: block;
+}
+
+.top-spacer,.bot-spacer {
+	display: block;
+	float: left;
+	width: 9px;
+	height: 100px;
+}
+
+#page-content .region-content {
+	padding: 0px;
+}
+
+#region-top-1 .block_html ul,
+#region-top-2 .block_html ul,
+#region-top-3 .block_html ul,
+#region-top-4 .block_html ul  {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#region-top-1 .block_html ul li,
+#region-top-2 .block_html ul li,
+#region-top-3 .block_html ul li,
+#region-top-4 .block_html ul li {
+	list-style-image: url([[pix:theme|li-block]]);
+	margin-bottom: 17px;
+	font-size: 14px;
+	color: #736563;
+	font-weight: bold;
+}
+
+#region-top .block_html a,
+#region-top .block_html a:link,
+#region-top .block_html a:visited,
+#region-bot .block_html a,
+#region-bot .block_html a:link,
+#region-bot .block_html a:visited,
+ {
+	font-size: 14px;
+	color: #736563;
+	text-decoration: none;
+}
+
+#region-top .block_html a:hover,
+#region-bot .block_html a:hover
+{
+	color: #ff5d00;
+}
+.navbar {
+	margin: 5px 0px;
+	display: block;
+}
+
+
+
+#region-top .block .content {
+	border: none;
+}
+
+#region-top .block.block_html .content .no-overflow {
+	padding: none !important;
+}
+
+#page-content .main-region {
+	
+}
+
+.modified {
+	display: none !important;
+}
+
+.generalbox {
+	margin: 10px;
+}
+
+.pagelayout-report #page-content {
+	/* width: 978px; */
+	width: 796px;
+	margin: 10px auto;
+	
+}
+
+.header {
+	font-size: 14px;
+	
+}
+
+.block .header, .block h2.header	{
+	padding: 10px 0px;
+	color: #333;
+}
+
+#region-pre div.block .content,
+#region-post div.block .content {
+	border-left: 1px solid #DCDCDC;
+	border-right: 1px solid #DCDCDC;
+	border-bottom: 1px solid #DCDCDC;
+-webkit-border-bottom-right-radius: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomright: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+
+
+#menu_dosk {
+	position: absolute;
+	top: -5px;
+	right: 10px;
+	
+}
+
+#menu_dosk a{
+	background: transparent url([[pix:theme|menu-item]]) top no-repeat;
+	height: 41px;
+	width: 125px;
+	line-height: 30px;
+	font-size: 12px;
+	font-weight: bold;
+	display: block;
+	float: left;
+	text-align: center;
+}
+
+#menu_dosk a:hover {
+	background: transparent url([[pix:theme|menu-item]]) bottom no-repeat;
+	color: white;
+	text-decoration: none;
+}
+
+.loginbox, .loginbox.twocolumns .loginpanel, .loginbox .subcontent {
+	border: none;
+}
+
+.loginbox {
+width: 423px;
+margin: 0 auto;
+}
+
+div.loginform {
+background: transparent url([[pix:theme|logowanie]]) top no-repeat;
+	width: 423px;
+	height: 334px;
+	position: relative;
+	display: block;
+}
+div.loginform div.tytul {
+	position: absolute;
+	left: 165px;
+	top: 45px;
+	font-size: 15px;
+	color: #111;
+	font-weight: bold;
+}
+
+
+div.loginform label {
+	color: #6f6f71;
+	font-size: 14px;
+}
+
+div.loginform
+.buttons {
+	position: absolute;
+	top: 109px;
+	left: 165px;
+	line-height: 24px;
+	width: 210px;
+}
+
+
+
+.usernameinput input, .passwordinput input {
+border: none;
+background: #fff;
+-webkit-box-shadow: 2px 2px 10px rgba(50, 50, 50, 0.46);
+-moz-box-shadow:    2px 2px 10px rgba(50, 50, 50, 0.46);
+box-shadow:         2px 2px 10px rgba(50, 50, 50, 0.46);
+	-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px;
+height: 24px;
+line-height: 24px;
+font-size: 14px;
+padding-left: 10px;
+padding-right: 10px;
+margin: 0px;
+width: 185px;
+}
+
+div.loginform #loginbtn {
+
+border: none;
+background: #fff url([[pix:theme|submit-button]])  center repeat-x;
+-webkit-box-shadow: 2px 2px 10px rgba(50, 50, 50, 0.46);
+-moz-box-shadow:    2px 2px 10px rgba(50, 50, 50, 0.46);
+box-shadow:         2px 2px 10px rgba(50, 50, 50, 0.46);
+-webkit-border-top-left-radius: 4px;
+-webkit-border-top-right-radius: 4px;
+-moz-border-radius-topleft: 4px;
+-moz-border-radius-topright: 4px;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+height: 24px;
+line-height: 24px;
+font-size: 14px;
+padding-left: 10px;
+padding-right: 10px;
+margin: 0px;
+font-weight: bold;
+cursor: pointer;
+margin-top: 10px;
+margin-left: 60px;
+}
+
+div.loginform
+input[type="checkbox"] {
+    display:none;
+}
+
+div.loginform a {
+color: #f28f1d;
+}
+
+div.loginform  .chlab  {
+	font-size: 11px;
+	line-height: 14px;
+	cursor: pointer;
+}
+div.loginform
+input[type="checkbox"] + label span {
+	float: left;
+    display:inline-block;
+    width:22px;
+    height:21px;
+    margin: 0px 4px 0 0;
+    vertical-align:middle;
+    background:url([[pix:theme|checkbox]]) left top no-repeat;
+    cursor:pointer;
+	 
+}
+div.loginform
+input[type="checkbox"]:checked + label span {
+    background:url([[pix:theme|checkbox]]) left bottom no-repeat;
+}
+
+div.loginform .menu-logowania {
+	position: absolute;
+	left: 35px;
+	top: 40px;
+	width: 114px;
+	height: 222px;
+}
+
+
+div.loginform .menu-logowania a.logowanie {
+color: #222;
+font-size: 14px;
+font-weight: bold;
+text-align: center;
+	display: block;
+	width: 114px;
+	height: 29px;
+	padding-top: 56px;
+	
+	background: transparent url([[pix:theme|menu-logowania]]) bottom no-repeat;
+}
+
+div.loginform .menu-logowania a.logowanie:hover,
+div.loginform .menu-logowania a.logowanie.selected {
+	background: transparent url([[pix:theme|menu-logowania]]) top no-repeat;
+	text-decoration: none;
+}
+
+
+#page-content {
+	min-width: 796px;
+	width: 796px;
+}
+
+div#region-main .region-content {
+	padding: 0px 10px;
+}

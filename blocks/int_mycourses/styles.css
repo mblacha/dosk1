@@ -1,0 +1,39 @@
+.block_int_mycourses .header {align:center;}
+
+#region-top-1 .block_int_mycourses ul,
+#region-top-2 .block_int_mycourses ul,
+#region-top-3 .block_int_mycourses ul,
+#region-top-4 .block_int_mycourses ul  {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#region-top-1 .block_int_mycourses ul li,
+#region-top-2 .block_int_mycourses ul li,
+#region-top-3 .block_int_mycourses ul li,
+#region-top-4 .block_int_mycourses ul li {
+	list-style-image: url([[pix:theme|li-block]]);
+	margin-bottom: 17px;
+	font-size: 14px;
+	color: #736563;
+	font-weight: bold;
+}
+
+#region-top .block_int_mycourses a,
+#region-top .block_int_mycourses a:link,
+#region-top .block_int_mycourses a:visited,
+#region-bot .block_int_mycourses a,
+#region-bot .block_int_mycourses a:link,
+#region-bot .block_int_mycourses a:visited,
+ {
+	font-size: 14px;
+	color: #736563;
+	text-decoration: none;
+}
+
+#region-top .block_int_mycourses a:hover,
+#region-bot .block_int_mycourses a:hover
+{
+	color: #ff5d00;
+}
+

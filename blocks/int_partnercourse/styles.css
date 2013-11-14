@@ -1,0 +1,114 @@
+#region-top-1 .block_int_partnercourse ul,
+#region-top-2 .block_int_partnercourse ul,
+#region-top-3 .block_int_partnercourse ul,
+#region-top-4 .block_int_partnercourse ul  {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#region-top-1 .block_int_partnercourse ul li,
+#region-top-2 .block_int_partnercourse ul li,
+#region-top-3 .block_int_partnercourse ul li,
+#region-top-4 .block_int_partnercourse ul li {
+	list-style-image: url([[pix:theme|li-block]]);
+	margin-bottom: 17px;
+	font-size: 14px;
+	color: #736563;
+	font-weight: bold;
+}
+
+#region-top .block_int_partneruser a,
+#region-top .block_int_partneruser a:link,
+#region-top .block_int_partneruser a:visited,
+#region-bot .block_int_partneruser a,
+#region-bot .block_int_partneruser a:link,
+#region-bot .block_int_partneruser a:visited,
+ {
+	font-size: 14px;
+	color: #736563;
+	text-decoration: none;
+}
+
+#region-top .block_int_partneruser a:hover,
+#region-bot .block_int_partneruser a:hover
+{
+	color: #ff5d00;
+}
+
+/**
+ * Moodle Forms
+ */
+#id_first_enrol_partnercourse_user,
+#id_second_enrol_partnercourse_user	{
+	border: 0px solid red;
+	padding:0;
+	margin:0;width:100%;
+}
+
+
+#id_first_enrol_partnercourse_user .fitem .fitemtitle,
+#id_second_enrol_partnercourse_user .fitem .fitemtitle {
+	width: 200px; 
+	min-height: 25px;
+	text-align: left; 
+	background-color: #eee; 
+}
+
+#id_second_enrol_partnercourse_user .fitem .fitemtitle {
+	width: 120px; 
+}
+
+#id_first_enrol_partnercourse_user .fitemtitle label,
+#id_second_enrol_partnercourse_user .fitemtitle label{
+	margin-left: 10px;
+	margin-top: 5px;
+	display:inline-block;	
+}
+
+#id_first_enrol_partnercourse_user .felement select, input[type=text]{
+	width:250px;	
+	margin-left: 10px;
+}
+
+#id_first_enrol_partnercourse_user .title,
+#id_second_enrol_partnercourse_user .title{
+	border-bottom: 1px solid #eee;
+	padding:5px;
+	margin-bottom: 15px;
+	width:100%;
+	color: #9a9a9a;	
+}
+
+#id_second_enrol_partnercourse_user #fitem_id_enrolfrom,
+#id_second_enrol_partnercourse_user #fitem_id_enrolto{
+	float: left; 
+	width: 250px;
+}
+
+
+#id_second_enrol_partnercourse_user #id_enrolfrom, #id_enrolto {
+	 background: white url([[pix:theme|calendar]]) right no-repeat;
+	 padding-right: 20px;
+}
+
+
+
+
+
+#fgroup_id_datagrp .fitemtitle{display:none;}
+#fgroup_id_datagrp .felement {border-bottom: 1px solid #eee;}
+#fgroup_id_datagrp .accesshide {display:block;}
+
+#enrol_partnercourse .collapsible-actions {display:none;}
+
+
+
+
+
+/*
+.enrol_partnercourse_user fieldset {border: 1px solid red;padding: 10px 0;margin: 0.7em 0;width:100%;}
+.enrol_partnercourse_user .fitem fieldset.felement {margin-top:0;padding-top:0;margin-bottom:0;padding-bottom:0;}
+.enrol_partnercourse_user .fpassword .unmask input {margin-left:5px;margin-right:3px;}
+.enrol_partnercourse_user .btn-cancel {color: #0000ff;}
+.enrol_partnercourse_user .btn-cancel:hover, .mform .btn-cancel:focus {color: #ff0000;}
+*/
