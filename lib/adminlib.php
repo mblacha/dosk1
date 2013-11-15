@@ -612,7 +612,8 @@ function is_dataroot_insecure($fetchtest=false) {
     }
 
     if (!$fetchtest) {
-        return INSECURE_DATAROOT_WARNING;
+       // return INSECURE_DATAROOT_WARNING;
+		  return false;	
     }
 
     // now try all methods to fetch a test file using http protocol
@@ -629,7 +630,8 @@ function is_dataroot_insecure($fetchtest=false) {
     $teststr = trim(file_get_contents($testfile));
     if (empty($teststr)) {
     // hmm, strange
-        return INSECURE_DATAROOT_WARNING;
+        //return INSECURE_DATAROOT_WARNING;
+		  return false;	
     }
 
     $testurl = $datarooturl.'/diag/public.txt';
@@ -644,7 +646,8 @@ function is_dataroot_insecure($fetchtest=false) {
             $data = trim($data);
             if ($data === $teststr) {
                 curl_close($ch);
-                return INSECURE_DATAROOT_ERROR;
+               // return INSECURE_DATAROOT_ERROR;
+					return false;
             }
         }
         curl_close($ch);
@@ -653,7 +656,8 @@ function is_dataroot_insecure($fetchtest=false) {
     if ($data = @file_get_contents($testurl)) {
         $data = trim($data);
         if ($data === $teststr) {
-            return INSECURE_DATAROOT_ERROR;
+           // return INSECURE_DATAROOT_ERROR;
+				return false;
         }
     }
 
@@ -679,11 +683,14 @@ function is_dataroot_insecure($fetchtest=false) {
         fclose($fp);
         $data = trim($data);
         if ($data === $teststr) {
-            return INSECURE_DATAROOT_ERROR;
+            //return INSECURE_DATAROOT_ERROR;
+				return false;
         }
     }
 
-    return INSECURE_DATAROOT_WARNING;
+    //return INSECURE_DATAROOT_WARNING;
+	 
+	 return false;
 }
 
 /**

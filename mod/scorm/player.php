@@ -101,6 +101,7 @@ if ($displaymode == 'popup') {
     $pagetitle = strip_tags("$shortname: ".format_string($scorm->name));
     $PAGE->set_title($pagetitle);
     $PAGE->set_heading($course->fullname);
+	 $PAGE->set_pagelayout('scorm');
 }
 if (!$cm->visible and !has_capability('moodle/course:viewhiddenactivities', $coursecontext)) {
     echo $OUTPUT->header();

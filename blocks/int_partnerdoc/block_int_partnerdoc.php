@@ -50,6 +50,15 @@ class block_int_partnerdoc extends block_base {
         $this->content = new stdClass;
         $this->content->text = $header;
         $this->content->footer = '';
+        
+        $this->content->text .= "<ul>\n";
+        
+        $this->content->text .= '<li>';
+        $str = get_string('cardclasses', 'block_int_partnerdoc');
+        $this->content->text .= '<a href="'.$CFG->wwwroot.'/blocks/int_partnerdoc/cards.php" title="'. $str .'">'.$str.'</a>';
+        $this->content->text .= "</li>\n";
+              
+        $this->content->text .= '</ul><div class="clearer"><!-- --></div>';
 
         $course = $this->page->course;
 

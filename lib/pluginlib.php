@@ -3021,11 +3021,11 @@ class plugininfo_block extends plugininfo_base {
         $ADMIN = $adminroot; // may be used in settings.php
         $block = $this; // also can be used inside settings.php
         $section = $this->get_settings_section_name();
-	
+
         if (!$hassiteconfig || (($blockinstance = block_instance($this->name)) === false)) {
             return;
         }
-	
+
         $settings = null;
         if ($blockinstance->has_config()) {
             if (file_exists($this->full_path('settings.php'))) {

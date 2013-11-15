@@ -28,10 +28,16 @@ if($hassidetop1){
 }
 
 switch ($top_blocks){
+
 case 1: $top_width = "980px"; break;
 case 2: $top_width = "480px"; break;
 case 3: $top_width = "320px"; break;
-case 4: $top_width = "238px"; break;
+case 4: $top_width = "238px"; break; 
+/*
+case 1: $top_width = "796px"; break;
+case 2: $top_width = "390px"; break;
+case 3: $top_width = "259px"; break;
+case 4: $top_width = "195px"; break;  */
 default: break;}
 
 $bot_blocks = 0;
@@ -97,21 +103,35 @@ echo $OUTPUT->doctype() ?>
 
 <!-- START OF HEADER -->
     <div id="page-header" class="clearfix">
-        <h1 class="headermain"><img src="<?php echo $OUTPUT->pix_url('logo', 'theme'); ?>" alt="dobreOSK"></h1>
-		  <div class="logotxt">
-		  	Profesjonalne kursy dla kierowców	
+	 <a href="<?php echo $CFG->wwwroot; ?>" title="Strona główna">
+        <h1 class="headermain"><img src="<?php echo $OUTPUT->pix_url('logo', 'theme'); ?>" alt="dobreOSK"></h1></a>
+		  
+		  <div class="mainlink" >
+		  	  <a href="<?php echo $CFG->wwwroot; ?>" title="Strona główna">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="" >Platforma szkoleniowa dla OSK </a>
 			</div>	
-		  <div class="mainlink">
-		  	  <a href="<?php echo $CFG->wwwroot; ?>">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="">Platforma szkoleniowa dla OSK </a>
-			</div>	
+			
+			<div id="menu_dosk">
+				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=2"; ?>">PKK</a>
+				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=7"; ?>">O platformie</a>
+				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=11"; ?>">Regulamin</a>
+				<?php
+				if(!$USER->id){
+				echo '<a href="'.$CFG->wwwroot.'/login/index.php">Logowanie</a>';
+				} else {
+				echo '<a href="'.$CFG->wwwroot.'/user/profile.php?id='.$USER->id.'">Twój profil</a>';
+				}
+				?>
+				
+			</div>
+			<?php 
+			/*
         <div class="headermenu"><?php
             echo $OUTPUT->login_info();
             //echo $OUTPUT->lang_menu();
             echo $PAGE->headingmenu;
         ?></div>
         
-			<?php 
-			/*
+			
 		  <div class="menutop">	
 				<table>
 					<tbody><tr>
@@ -133,11 +153,14 @@ echo $OUTPUT->doctype() ?>
 			
     </div>
 	 
-	 <?php if ($hascustommenu) { ?>
+	 <?php
+	 /* if ($hascustommenu) { ?>
     	<div id="menu">
 	     <div id="custommenu"><?php echo $custommenu; ?></div>
 		</div>
-    <?php } ?>
+    <?php } */ 
+	 
+	 ?>
 	 
 	 
 			
@@ -322,7 +345,9 @@ echo $OUTPUT->doctype() ?>
 				 	&copy; Copyright 2012 ekurs.eu. Wszelkie prawa zastrzeżone. | Design by StudioSzahal & SPH Credo | Powered by SPH Credo
 				 </div>
 	 			*/ ?>
-	 
+	 <?php
+	 echo $OUTPUT->login_info();
+?>
 	 
         		<div class="footer-left">
 

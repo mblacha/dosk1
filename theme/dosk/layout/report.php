@@ -56,17 +56,27 @@ echo $OUTPUT->doctype() ?>
 
 
 <!-- START OF CONTENT -->
-    <div id="page-content" class="clearfix">
-	 
-	 	
-
-		<div class="main-region">
-       	<div class="region-content">
-	         <?php echo $OUTPUT->main_content(); ?>
-	       </div>
-		 </div>
-							
-	
+   <div id="page-header" class="clearfix">
+	 <a href="<?php echo $CFG->wwwroot; ?>" title="Strona główna">
+        <h1 class="headermain"><img src="<?php echo $OUTPUT->pix_url('logo', 'theme'); ?>" alt="dobreOSK"></h1></a>
+		  
+		  <div class="mainlink" >
+		  	  <a href="<?php echo $CFG->wwwroot; ?>" title="Strona główna">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="" >Platforma szkoleniowa dla OSK </a>
+			</div>	
+			
+			<div id="menu_dosk">
+				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=2"; ?>">PKK</a>
+				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=7"; ?>">O platformie</a>
+				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=11"; ?>">Regulamin</a>
+				<?php
+				if(!$USER->id){
+				echo '<a href="'.$CFG->wwwroot.'/login/index.php">Logowanie</a>';
+				} else {
+				echo '<a href="'.$CFG->wwwroot.'/user/profile.php?id='.$USER->id.'">Twój profil</a>';
+				}
+				?>
+				
+			</div>
     </div>
 <!-- END OF CONTENT -->
 	 

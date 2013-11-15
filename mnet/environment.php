@@ -67,12 +67,10 @@ class mnet_environment {
         if (during_initial_install()) return true;
         if ($CFG->mnet_dispatcher_mode == 'off') return true;
         if (!extension_loaded("openssl")) return true;
-        if (!empty($this->keypair)) return true;    
-        
+        if (!empty($this->keypair)) return true;
 
         $this->keypair = array();
         $keypair = get_config('mnet', 'openssl');
-        
 
         if (!empty($keypair)) {
             // Explode/Implode is faster than Unserialize/Serialize
@@ -84,7 +82,7 @@ class mnet_environment {
             $this->keypair['publickey']  = openssl_pkey_get_public($this->keypair['certificate']);
         } else {
             // Key generation/rotation
-            
+
             // 1. Archive the current key (if there is one).
             $result = get_config('mnet', 'openssl_history');
             if(empty($result)) {

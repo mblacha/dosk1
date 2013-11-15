@@ -14,3 +14,5 @@ $string['int_partnerdoc:addinstance'] = 'Add a new logged in user block';
 $string['int_partnerdoc:myaddinstance'] = 'Add a new logged in user block to My home';
 $string['int_partnerdoc_settings'] = 'Visible user information';
 $string['pluginname'] = 'Partner documents';
+$string['cardclasses'] = 'Card classes';
+

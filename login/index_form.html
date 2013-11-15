@@ -18,14 +18,14 @@ if (!empty($CFG->loginpasswordautocomplete)) {
       <div class="skiplinks"><a class="skip" href="signup.php"><?php print_string("tocreatenewaccount"); ?></a></div>
 <?php
   } ?>
-    <h2><?php print_string("returningtosite") ?></h2>
+    
       <div class="subcontent loginsub">
         <div class="desc">
           <?php
-            print_string("loginusing");
-            echo '<br/>';
-            echo '('.get_string("cookiesenabled").')';
-            echo $OUTPUT->help_icon('cookiesenabled');
+           // print_string("loginusing");
+            //echo '<br/>';
+           // echo '('.get_string("cookiesenabled").')';
+           // echo $OUTPUT->help_icon('cookiesenabled');
            ?>
         </div>
         <?php
@@ -36,18 +36,60 @@ if (!empty($CFG->loginpasswordautocomplete)) {
               echo html_writer::end_tag('div');
           }
         ?>
+		  
         <form action="<?php echo $CFG->httpswwwroot; ?>/login/index.php" method="post" id="login" <?php echo $autocomplete; ?> >
           <div class="loginform">
-            <div class="form-label"><label for="username"><?php print_string("username") ?></label></div>
-            <div class="form-input">
+			 
+			 <?php if(IsSet($_GET['userl']) && $_GET['userl']=='partner') { ?> 
+
+			 <div class="tytul">Logowanie dla partnerów</div>
+			 <div class="menu-logowania">
+			 	<a href="<?php echo $CFG->wwwroot; ?>/auth/int_keygen/" class="logowanie">Kursanci</a>
+				<a href="<?php echo $CFG->wwwroot;?>/login/index.php" class="logowanie">Wykładowcy</a>
+				<a  class="logowanie selected">Partnerzy</a>
+			 </div>
+			 
+			 <?php  } else{ ?>	
+			 <div class="menu-logowania">
+			 	<a href="<?php echo $CFG->wwwroot; ?>/auth/int_keygen/" class="logowanie">Kursanci</a>
+				<a  class="logowanie selected">Wykładowcy</a>
+				<a href="<?php echo $CFG->wwwroot;?>/login/index.php?userl=partner" class="logowanie">Partnerzy</a>
+			 </div>
+			 
+			 
+			 
+			 <div class="tytul">Logowanie dla wykładowców</div>
+			 
+			 <?php  } ?>	
+			 <div class="buttons">
+            <div class="usernamelabel">
+				<label for="username"><?php print_string("username") ?></label>
+				</div>
+				
+            <div class="usernameinput">
               <input type="text" name="username" id="username" size="15" value="<?php p($frm->username) ?>" />
             </div>
-            <div class="clearer"><!-- --></div>
-            <div class="form-label"><label for="password"><?php print_string("password") ?></label></div>
-            <div class="form-input">
+            
+            <div class="passwordlabel"><label for="password"><?php print_string("password") ?></label>
+				</div>
+				
+            <div class="passwordinput">
               <input type="password" name="password" id="password" size="15" value="" <?php echo $autocomplete; ?> />
-              <input type="submit" id="loginbtn" value="<?php print_string("login") ?>" />
+              
             </div>
+				
+				<div style="display: block; margin-top: 5px;">
+				
+				
+					<input type="checkbox" id="c1">
+					
+					<label for="c1" class="chlab"><span></span>
+					<div >Zapoznałem się z <a href="#">regulaminem</a> i&nbsp;akceptuję jego postanowienia.</div></label>
+					
+				</div>
+				
+				<input type="submit" id="loginbtn" value="<?php print_string("login") ?>" />
+				</div>
           </div>
             <div class="clearer"><!-- --></div>
               <?php if (isset($CFG->rememberusername) and $CFG->rememberusername == 2) { ?>

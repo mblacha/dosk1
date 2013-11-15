@@ -68,7 +68,7 @@ class block_myprofile extends block_base {
         $course = $this->page->course;
 
         if (!isset($this->config->display_picture) || $this->config->display_picture == 1) {
-            $this->content->text .= '<div class="myprofileitem picture">---';
+            $this->content->text .= '<div class="myprofileitem picture">';
             $this->content->text .= $OUTPUT->user_picture($USER, array('courseid'=>$course->id, 'size'=>'100', 'class'=>'profilepicture'));  // The new class makes CSS easier
             $this->content->text .= '</div>';
         }

@@ -351,7 +351,7 @@ function mnet_generate_keypair($dn = null, $days=28) {
 
     $site = get_site();
     $organization = $site->fullname;
-    
+
     $keypair = array();
 
     $country  = 'NZ';
@@ -404,7 +404,6 @@ function mnet_generate_keypair($dn = null, $days=28) {
     } else {
         $new_key = openssl_pkey_new();
     }
-   
     if ($new_key === false) {
         // can not generate keys - missing openssl.cnf??
         return null;

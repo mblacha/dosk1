@@ -101,8 +101,8 @@ body {
 }
 
 .pagelayout-report #page-content {
-	/* width: 978px; */
-	width: 796px;
+	width: 978px; 
+	/*width: 796px; */
 	margin: 10px auto;
 	
 }
@@ -302,10 +302,41 @@ div.loginform .menu-logowania a.logowanie.selected {
 
 
 #page-content {
-	min-width: 796px;
-	width: 796px;
+	min-width: 980px;
+	width: 980px;
 }
 
 div#region-main .region-content {
 	padding: 0px 10px;
+}
+
+
+/* BASE*/
+
+#page {
+	width: 980px; 
+	margin: 0 auto;
+}
+ 
+#page #page-header {
+	width: 980px;
+	margin: 0 auto;
+	background: transparent url([[pix:theme|header]]) no-repeat top;
+	height: 237px;
+	position: relative;
+	margin-top: 20px;
+	
+} 
+
+#page #page-header .headermain {
+	position: absolute;
+	left: 0px;
+	top: 20px;
+}
+
+#page #page-header .headermenu {
+	position: absolute; 
+ 	top: 89px;
+	right: 10px;
+	
 }
