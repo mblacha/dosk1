@@ -183,7 +183,7 @@ if ($usernew = $userform->get_data()) {
         // fresh cli install - we need to finish site settings
         redirect(new moodle_url('/admin/index.php'));
     } else {
-    	redirect(new moodle_url('/index.php'));
+    	redirect(new moodle_url('/auth/int_keygen/jump.php')); 
     }
 }
 

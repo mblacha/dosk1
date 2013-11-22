@@ -40,17 +40,18 @@ class block_int_myprofile extends block_base {
             return '';      // Never useful unless you are logged in as real users
         }
         
-    	if (!has_capability('block/int_myprofile:addinstance', context_system::instance())) {
+    	/*if (!has_capability('block/int_myprofile:addinstance', context_system::instance())) {
             $this->title = '';
-            $header = '<div class="header"><img src="'.$CFG->wwwroot.'/blocks/int_myprofile/pix/header.png" alt="header"></div>';
+            $header = '<div class="header"><img src="'.$CFG->wwwroot.'/blocks/int_myprofile/pix/obsluga-os-szkolonej.png" alt="header"></div>';
     	} else {
 			$header = '';
-		}       
+		}       */ 
 
         $this->content = new stdClass;
-        $this->content->text = $header;
+      //  $this->content->text = $header;
         $this->content->footer = '';
-        
+        //KŁ	
+		  $this->content->text .= '<img class="headericon" src="'.$CFG->wwwroot.'/blocks/int_myprofile/pix/obsluga-os-szkolonej.png" alt="header">';
         $this->content->text .= "<ul>\n";
         
         $this->content->text .= '<li>';

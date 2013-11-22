@@ -40,28 +40,35 @@ class block_int_partnercourse extends block_base {
             return '';      // Never useful unless you are logged in as real users
         }
         
-    	if (!has_capability('block/int_partnercourse:addinstance', context_system::instance())) {
+     /*	if (!has_capability('block/int_partnercourse:addinstance', context_system::instance())) {
             $this->title = '';
-            $header = '<div class="header"><img src="'.$CFG->wwwroot.'/blocks/int_partnercourse/pix/header.png" alt="header"></div>';
+            //$header = '<div class="header"><img src="'.$CFG->wwwroot.'/blocks/int_partnercourse/pix/header.png" alt="header"></div>';
+				$header = '';
         } else {
         	$header = '';
-        } 
+        }  */
         
         $this->content = new stdClass;
-        $this->content->text = $header;
+        //$this->content->text = $header;
         $this->content->footer = '';
-        
+		$this->content->text .= '<img class="headericon" src="'.$CFG->wwwroot.'/blocks/int_partnercourse/pix/partner.png" alt="header">';
+			
+			
         $this->content->text .= "<ul>\n";
         
+        /*
         $this->content->text .= '<li>';
         $str = get_string('addcourse', 'block_int_partnercourse');      
         $this->content->text .= '<a href="'.$CFG->wwwroot.'/blocks/int_partnercourse/enrol.php?blockid='.$this->instance->id.'" title="'. $str .'">'.$str.'</a>';      
-        $this->content->text .= "</li>\n";        
+        $this->content->text .= "</li>\n"; 
+        */       
     
+        
         $this->content->text .= '<li>';
         $str = get_string('listcourses', 'block_int_partnercourse');    
         $this->content->text .= '<a href="'.$CFG->wwwroot.'/blocks/int_partnercourse/courses.php?blockid='.$this->instance->id.'" title="'. $str .'">'.$str.'</a>';
-        $this->content->text .= "</li>\n";    
+        $this->content->text .= "</li>\n";   
+
         
         $this->content->text .= '</ul><div class="clearer"><!-- --></div>'; 
 

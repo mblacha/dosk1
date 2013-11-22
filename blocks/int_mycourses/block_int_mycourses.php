@@ -40,15 +40,15 @@ class block_int_mycourses extends block_base {
             return '';      // Never useful unless you are logged in as real users
         }
  
-        if (!has_capability('block/int_mycourses:addinstance', context_system::instance())) {
+      /*  if (!has_capability('block/int_mycourses:addinstance', context_system::instance())) {
             $this->title = '';
             $header = '<div class="header"><img src="'.$CFG->wwwroot.'/blocks/int_mycourses/pix/header.png" alt="header"></div>';            
         } else {
 			$header = '';
-		}         
+		}    */      
         
         $this->content = new stdClass;
-        $this->content->text = $header;
+       // $this->content->text = $header;
         $this->content->footer = '';        
         
         if($mycourses=$this->get_remote_courses()){

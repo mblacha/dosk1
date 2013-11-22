@@ -40,19 +40,20 @@ class block_int_partneruser extends block_base {
             return '';      // Never useful unless you are logged in as real users
         }
         
-    	if (!has_capability('block/int_partneruser:addinstance', context_system::instance())) {
+		/*
+		if (!has_capability('block/int_partneruser:addinstance', context_system::instance())) {
             $this->title = '';
-            $header = '<div class="header"><img src="'.$CFG->wwwroot.'/blocks/int_partneruser/pix/header.png" alt="header"></div>';
+            $header = '<img class="headericon" src="'.$CFG->wwwroot.'/blocks/int_partneruser/pix/obsluga-os-szkolonej.png" alt="header">';
         } else {
         	$header = '';
-        }        
-        
+        } 
+		*/		
 
+		$header = '<img class="headericon" src="'.$CFG->wwwroot.'/blocks/int_partneruser/pix/obsluga-os-szkolonej.png" alt="header">';
         $this->content = new stdClass;
         $this->content->text = $header;
         $this->content->footer = '';
-        
-
+			
         $this->content->text .= "<ul>\n";
         
         $this->content->text .= '<li>';

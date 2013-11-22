@@ -119,7 +119,12 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
         $frm = false;
     } else {
         if (empty($errormsg)) {
-            $user = authenticate_user_login($frm->username, $frm->password);            
+            $user = authenticate_user_login($frm->username, $frm->password); 
+            if($user && ($user->auth !== 'int_keygen')){
+            	$user = null;
+            	$errormsg = get_string('errornouser', 'auth_int_keygen');
+            	$errorcode = 10;
+            }           
         }
     }
  
@@ -179,6 +184,8 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
         }
 
     /// Prepare redirection
+    
+        $SESSION->wantsurl = $CFG->wwwroot . '/auth/int_keygen/jump.php';
 
         if ($authplugin->user_not_fully_set_up($USER)) {
             $urltogo = $CFG->wwwroot.'/user/edit.php';

@@ -1,7 +1,7 @@
 <?php
 
 $hasheading = ($PAGE->heading);
-$hasnavbar = (empty($PAGE->layout_options['nonavbar']) && $PAGE->has_navbar());
+$hasnavbar = (empty($PAGE->layout_options['nonavbar']) && $PAGE->has_navbar() && has_capability('moodle/site:config', context_system::instance()));
 $hasfooter = (empty($PAGE->layout_options['nofooter']));
 $hassidepre = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->region_has_content('side-pre', $OUTPUT));
 $hassidepost = (empty($PAGE->layout_options['noblocks']) && $PAGE->blocks->region_has_content('side-post', $OUTPUT));
@@ -11,11 +11,11 @@ $haslogininfo = (empty($PAGE->layout_options['nologininfo']));
 $hassidetop1 = $PAGE->blocks->region_has_content('top-1', $OUTPUT);
 $hassidetop2 = $PAGE->blocks->region_has_content('top-2', $OUTPUT);
 $hassidetop3 = $PAGE->blocks->region_has_content('top-3', $OUTPUT);
-$hassidetop4 = $PAGE->blocks->region_has_content('top-4', $OUTPUT);
+//$hassidetop4 = $PAGE->blocks->region_has_content('top-4', $OUTPUT);
 $hassidebot1 = $PAGE->blocks->region_has_content('bot-1', $OUTPUT);
 $hassidebot2 = $PAGE->blocks->region_has_content('bot-2', $OUTPUT);
 $hassidebot3 = $PAGE->blocks->region_has_content('bot-3', $OUTPUT);
-$hassidebot4 = $PAGE->blocks->region_has_content('bot-4', $OUTPUT);
+//$hassidebot4 = $PAGE->blocks->region_has_content('bot-4', $OUTPUT);
 $top_blocks = 0;
 if($hassidetop1){
 	$top_blocks++;
@@ -23,9 +23,9 @@ if($hassidetop1){
 		$top_blocks++;
 		if($hassidetop3){
 			$top_blocks++;
-			if($hassidetop4){
+		  /*	if($hassidetop4){
 				$top_blocks++;
-			}
+			} */
 		}
 	}
 }
@@ -34,7 +34,7 @@ switch ($top_blocks){
 case 1: $top_width = "980px"; break;
 case 2: $top_width = "480px"; break;
 case 3: $top_width = "320px"; break;
-case 4: $top_width = "238px"; break;
+//case 4: $top_width = "238px"; break;
 default: break;}
 
 $bot_blocks = 0;
@@ -44,9 +44,9 @@ if($hassidebot1){
 		$bot_blocks++;
 		if($hassidebot3){
 			$bot_blocks++;
-			if($hassidebot4){
+			/*if($hassidebot4){
 				$bot_blocks++;
-			}
+			} */
 		}
 	}
 }
@@ -54,7 +54,7 @@ switch ($bot_blocks){
 case 1: $bot_width = "980px"; break;
 case 2: $bot_width = "480px"; break;
 case 3: $bot_width = "320px"; break;
-case 4: $bot_width = "238px"; break;
+//case 4: $bot_width = "238px"; break;
 default: break;}
 
 $showsidepre = ($hassidepre && !$PAGE->blocks->region_completely_docked('side-pre', $OUTPUT));
@@ -182,7 +182,7 @@ echo $OUTPUT->doctype() ?>
 
 
 <!-- START OF TOP -->	 
-<?php if ($hassidetop1 OR $hassidetop2 OR $hassidetop3 OR $hassidetop4) { 
+<?php if ($hassidetop1 OR $hassidetop2 OR $hassidetop3) { 
 
 ?>
 
@@ -218,15 +218,15 @@ echo $OUTPUT->doctype() ?>
 							}		
 							
 							
-							if($hassidetop4 && ($hassidetop3 OR $hassidetop2 OR $hassidetop1)) {
+						  /*	if($hassidetop4 && ($hassidetop3 OR $hassidetop2 OR $hassidetop1)) {
 								echo '<div class="top-spacer"></div>';
 							}
 							
-							if($hassidetop4){
+						 	if($hassidetop4){
 							echo '<div id="region-top-4" style="width: '.$top_width.';">';
 							echo $OUTPUT->blocks_for_region('top-4');
 							echo '</div>';
-							}				
+							}		   */		
                     ?>
                     
 							</div>
@@ -282,7 +282,7 @@ echo $OUTPUT->doctype() ?>
 <!-- END OF CONTENT -->
 	  
 <!-- START OF BOTTOM -->	 
-<?php if ($hassidebot1 OR $hassidebot2 OR $hassidebot3 OR $hassidebot4) { 
+<?php if ($hassidebot1 OR $hassidebot2 OR $hassidebot3) { 
 
 ?>
                 <div id="region-bot" class="block-region">
@@ -315,7 +315,7 @@ echo $OUTPUT->doctype() ?>
 							}		
 							
 							
-							if($hassidebot4 && ($hassidebot3 OR $hassidebot2 OR $hassidebot1)) {
+						   /*	if($hassidebot4 && ($hassidebot3 OR $hassidebot2 OR $hassidebot1)) {
 								echo '<div class="bot-spacer"></div>';
 							}
 							
@@ -323,7 +323,7 @@ echo $OUTPUT->doctype() ?>
 							echo '<div id="region-bot-4" style="width: '.$bot_width.';">';
 							echo $OUTPUT->blocks_for_region('bot-4');
 							echo '</div>';
-							}				
+							} */				
                     ?>
                     
 							</div>
@@ -342,40 +342,24 @@ echo $OUTPUT->doctype() ?>
    <!-- START OF FOOTER -->
     <div id="page-footer" class="clearfix">
 	
-			  <?php 
-			  /*	<div id="menua">
-					
-				 	<a href="<?php echo $CFG->wwwroot;?>">Strona główna</a>
-					 <a href="<?php echo $CFG->wwwroot;?>/mod/page/view.php?id=5">O nas</a>
-					 <a href="<?php echo $CFG->wwwroot;?>/mod/page/view.php?id=29">Kontakt</a>
-					 <a href="http://portalnaukijazdy.pl/forum_new/" target="_blank">Forum</a>
-					 <a href="http://sklep.sphcredo.pl/" target="_blank">Sklep on-line</a>
-					 <a href="">Mapa strony</a>
-					 
-					 <a href="<?php echo $CFG->wwwroot;?>/mod/page/view.php?id=4">Regulamin</a>
-					 <a href="">Reklama</a>
-					 <a href="<?php echo $CFG->wwwroot;?>/mod/page/view.php?id=6">Pressroom</a>
-					 <a href="mailto:kontakt@ekurs.eu?subject=Błąd na stronie" style="color: red;">Zgłoś błąd na stronie</a>
-				 </div>
-				 <div id="foottext">
-				 	&copy; Copyright 2012 ekurs.eu. Wszelkie prawa zastrzeżone. | Design by StudioSzahal & SPH Credo | Powered by SPH Credo
-				 </div>
-				 */ ?>
+	
+	&copy; Copyright dobreOSK.pl Wszelkie prawa zastrzeżone | Powered by SPH Credo
+	
+	
+			 
 	 <?php
 	 echo $OUTPUT->login_info();
 ?>
-        		<div class="footer-left">
-
-		            
-		            
-		        </div>
-
-		        <div class="footer-right">
-		            
-		        </div>
+        	   <div class="links">
+<a href="http://dobreosk.pl/mod/page/view.php?id=12" class="faq"></a>
+				<a href="http://dobreosk.pl/mod/page/view.php?id=13" class="kontakt"></a>
+	 </div>
 
         <?php echo $OUTPUT->standard_footer_html(); ?>
-    </div>
+    
+	
+	 
+	 </div>
     <div class="clearfix"></div>
 </div>
 <!-- END OF FOOTER -->

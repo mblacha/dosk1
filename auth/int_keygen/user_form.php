@@ -108,7 +108,7 @@ class user_keygen_edit_form extends moodleform {
         $errors += profile_validation($usernew, $files);   
         
         if (!check_password_policy($usernew->password, $errmsg)) {
-        	$errors['password'] = et_string('errorpassword','auth_int_keygen');
+        	$errors['password'] = get_string('errorpassword','auth_int_keygen');
         }
         
         if ($usernew->password != $usernew->password2) {

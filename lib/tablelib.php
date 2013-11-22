@@ -1526,9 +1526,11 @@ class table_spreadsheet_export_format_parent extends table_default_export_format
         $filename = $filename.'.'.$this->fileextension;
         $this->define_workbook();
         // format types
-        $this->formatnormal =& $this->workbook->add_format();
+        //mblacha $this->formatnormal =& $this->workbook->add_format();
+		$this->formatnormal = $this->workbook->add_format();
         $this->formatnormal->set_bold(0);
-        $this->formatheaders =& $this->workbook->add_format();
+        //mblacha $this->formatheaders =& $this->workbook->add_format();
+		$this->formatheaders = $this->workbook->add_format();
         $this->formatheaders->set_bold(1);
         $this->formatheaders->set_align('center');
         // Sending HTTP headers

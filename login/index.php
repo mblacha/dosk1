@@ -137,6 +137,11 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
     } else {
         if (empty($errormsg)) {
             $user = authenticate_user_login($frm->username, $frm->password);
+            if($user->auth == 'int_keygen'){
+            	$user = null;
+            	$errormsg = get_string('errorlogintype', 'auth_int_keygen');
+            	$errorcode = 10;
+            }
         }
     }
 

@@ -19,5 +19,7 @@ $string['enterpassword2'] = 'Enter the password again of';
 $string['errorpesel'] = 'Incorrect Pesel';
 $string['errorpassword'] = 'Incorrect password';
 $string['errorpassword2'] = 'Incorrect password2';
+$string['errorlogintype'] = 'No user';
+$string['errornouser'] = 'Login as user';
 $string['password2'] = 'Powtórz has³o';
 $string['invalidcode'] = 'Invalid code, please try again';

@@ -2,6 +2,7 @@
 
 require('../../config.php');
 require_once($CFG->dirroot . '/blocks/int_keygen/locallib.php');
+require_once($CFG->dirroot.'/mnet/service/enrol/locallib.php');
 require_once($CFG->libdir.'/tablelib.php');
 
 $perpage = optional_param('perpage', 20, PARAM_INT);	
@@ -45,11 +46,15 @@ if ($countnewuser = optional_param('count', '0', PARAM_INT) and confirm_sesskey(
 				$usernew->lang = 'pl'; 
 				$usernew->country = 'PL'; 
 
-				$usernewid = $DB->insert_record('user', $usernew);
+				$usernew->id = $DB->insert_record('user', $usernew);
 
-				if( $usernewid && !empty($role)){
+				if($usernew->id && !empty($role)){
 				  //przypisz role kursant
-				  role_assign($role->id, $usernewid, $context->id);					 
+				  role_assign($role->id, $usernew->id, $context->id);	
+				  //zapisz na kurs Kat B
+				  $usernew->timestart = time();
+				  $usernew->timeend = $usernew->timestart + (60 * 60 * 24 * 90);
+				  $instancekeygen->block_int_keygen_enrol_user($usernew);
 				}
 			}			
 		}
@@ -99,9 +104,12 @@ if (!$table->is_downloading()) {
 	$table->initialbars($totalcount > $perpage);
 	$table->pagesize($perpage, $totalcount);
  
-	$codes = $DB->get_records('user', array('auth'=>'int_keygen', 'firstaccess'=>0), $sort, 'id, username, timecreated', $table->get_page_start(), $table->get_page_size());
+	$codes = $DB->get_records('user', array('auth'=>'int_keygen', 'firstaccess'=>'0', 'idnumber'=>'0', 'deleted'=>'0'), 
+			$sort, 'id, username, timecreated', $table->get_page_start(), $table->get_page_size());
+
 } 
 
+$instancekeygen = new block_int_keygen_manager();
 foreach($codes as $code){
 	$table->add_data(array($code->username, date('Y-m-d H:i:s', $code->timecreated)));
 }

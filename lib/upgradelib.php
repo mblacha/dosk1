@@ -810,6 +810,7 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
         }
 
         if (empty($currblock->version)) { // block not installed yet, so install it
+        	
             $conflictblock = array_search($blocktitle, $blocktitles);
             if ($conflictblock !== false) {
                 // Duplicate block titles are not allowed, they confuse people
@@ -833,7 +834,7 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
             }
 
             $blocktitles[$block->name] = $blocktitle;
-
+            
             // Install various components
             update_capabilities($component);
             log_update_descriptions($component);
@@ -846,6 +847,7 @@ function upgrade_plugins_blocks($startcallback, $endcallback, $verbose) {
             $endcallback($component, true, $verbose);
 
         } else if ($currblock->version < $block->version) {
+        	
             $startcallback($component, false, $verbose);
 
             if (is_readable($fullblock.'/db/upgrade.php')) {
@@ -1625,10 +1627,10 @@ function core_tables_exist() {
  */
 function upgrade_plugin_mnet_functions($component) {
     global $DB, $CFG;
-
-    list($type, $plugin) = explode('_', $component);
+   
+    list($type, $plugin) = normalize_component($component); //explode('_', $component);
     $path = get_plugin_directory($type, $plugin);
-
+   
     $publishes = array();
     $subscribes = array();
     if (file_exists($path . '/db/mnet.php')) {
@@ -1642,7 +1644,7 @@ function upgrade_plugin_mnet_functions($component) {
     }
 
     static $servicecache = array();
-
+  
     // rekey an array based on the rpc method for easy lookups later
     $publishmethodservices = array();
     $subscribemethodservices = array();
