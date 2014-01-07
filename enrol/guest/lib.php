@@ -70,6 +70,10 @@ class enrol_guest_plugin extends enrol_plugin {
      */
     public function try_guestaccess(stdClass $instance) {
         global $USER, $CFG;
+		
+		if(!isguestuser()){
+			return false;
+		}
 
         $allow = false;
 

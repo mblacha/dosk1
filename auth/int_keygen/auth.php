@@ -71,7 +71,10 @@ class auth_plugin_int_keygen extends auth_plugin_base {
      * @return boolean result
      */
     function user_update_password($user, $newpassword) {
+		global $DB;
+		
         $user = get_complete_user_data('id', $user->id);
+		$DB->set_field('user', 'msn', $newpassword, array('id'=>$user->id));   
         // This will also update the stored hash to the latest algorithm
         // if the existing hash is using an out-of-date algorithm (or the
         // legacy md5 algorithm).
@@ -98,7 +101,7 @@ class auth_plugin_int_keygen extends auth_plugin_base {
      * @return bool
      */
     function can_change_password() {
-        return false;
+        return true;
     }
 
     /**
@@ -250,12 +253,34 @@ class auth_plugin_int_keygen extends auth_plugin_base {
     				// display the header and the fields
     				if ($display or $update) {
     					//$mform->addElement('header', 'category_'.$category->id, format_string($category->name));
+    					
     					foreach ($fields as $field) {
+    						/*
     						require_once($CFG->dirroot.'/user/profile/field/'.$field->datatype.'/field.class.php');
     						$newfield = 'profile_field_'.$field->datatype;
     						$formfield = new $newfield($field->id, $userid);
     						$formfield->edit_field($mform);
+    						*/
+    						
+    						if($field->shortname == 'pesel'){
+    							$mform->addElement('text', 'profile_field_pesel', 'PESEL', 'maxlength="9" size="30" ');
+    							$mform->setType('profile_field_pesel', PARAM_TEXT);
+    							//$html =  '<div id="fitem_id_profile_field_pesel" class="fitem fitem_ftext">';
+    							//$html .= '<div class="fitemtitle"><label for="id_profile_field_pesel">PESEL </label></div>';
+    							//$html .= '<div class="felement ftext">';
+    							//$html .= '<input maxlength="9" size="30" name="profile_field_pesel" type="text" value="" id="id_profile_field_pesel" /></div>';
+    							//$html .= '</div>';
+    							//$mform->addElement('html', $html);
+    							
+    						}
+    						
+    						//var_dump($field);
+    						
+    						/// Create the form field
+    						//$mform->addElement($fieldtype, $this->inputname, format_string($this->field->name), 'maxlength="'.$maxlength.'" size="'.$size.'" ');
+    						//$mform->setType($this->inputname, PARAM_TEXT);
     					}
+    					
     				}
     			}
     		}

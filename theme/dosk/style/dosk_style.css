@@ -1,3 +1,38 @@
+/* inne */
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/**************/
+
+
+
 #adminsettings .form-item .form-description {
     width: 580px;
     margin: 0.5em 0 0em 162px;
@@ -175,20 +210,43 @@ border-bottom-left-radius: 5px;
 
 #menu_dosk a{
 	background: transparent url([[pix:theme|menu-item]]) top no-repeat;
-	height: 41px;
-	width: 125px;
-	line-height: 30px;
-	font-size: 12px;
-	font-weight: bold;
+	height: 49px;
+	width: 146px;
+	line-height: 36px;
+	font-size: 16px;
+	font-weight: normal;
 	display: block;
 	float: left;
 	text-align: center;
+	color: #000;
+	font-family: signika;
 }
 
 #menu_dosk a:hover {
 	background: transparent url([[pix:theme|menu-item]]) bottom no-repeat;
 	color: white;
 	text-decoration: none;
+}
+
+#menu_dosk a.log_in {
+	background: transparent url([[pix:theme|zaloguj_btn]]) top no-repeat;
+	height: 49px;
+	width: 146px;
+	text-align: left;
+	text-indent: 36px;
+}
+
+#menu_dosk a.log_out {
+	background: transparent url([[pix:theme|wyloguj_btn]]) top no-repeat;
+	height: 49px;
+	width: 146px;
+	text-align: left;
+	text-indent: 34px;
+}
+
+#menu_dosk a.log_in:hover,
+#menu_dosk a.log_out:hover {
+	background-position: bottom;
 }
 
 .loginbox, .loginbox.twocolumns .loginpanel, .loginbox .subcontent {
@@ -251,7 +309,7 @@ margin: 0px;
 width: 185px;
 }
 
-div.loginform #loginbtn {
+div.loginform #loginbtn , .buttonstyle{
 
 border: none;
 background: #fff url([[pix:theme|submit-button]])  center repeat-x;
@@ -387,31 +445,629 @@ div.links {
 }
 
 
-div.links a.kontakt {
+
+h1.title {
+	font-family: 'signika';
+	font-weight: 500;
+}
+
+#page-mod-page-view div#region-main .generalbox {
+	border: 0px !important;
+}
+
+#page-kontakt #page-content,
+#page-mod-page-view #page-content {
+
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+}
+
+
+#page-kontakt div#region-main-wrap,
+#page-mod-page-view div#region-main-wrap {
+	background: transparent url([[pix:theme|mod-page-bg]]) repeat-y center top;
+}
+
+#page-kontakt div#region-main-wrap #region-main,
+#page-mod-page-view div#region-main-wrap #region-main {
+	background: transparent url([[pix:theme|mod-page-bot]]) no-repeat bottom;
+}
+
+#page-kontakt div#region-main-wrap #region-main .region-content,
+#page-mod-page-view div#region-main-wrap #region-main .region-content {
+	background: transparent url([[pix:theme|mod-page-top]]) no-repeat top;
+}
+
+#page-kontakt div#region-main-wrap #region-main .region-content,
+#page-mod-page-view div#region-main-wrap #region-main .region-content {
+padding: 0px 10px;
+min-height: 404px;
+}
+
+#page-kontakt div#region-main-wrap #region-main .region-content,
+#page-mod-page-view div#region-main-wrap #region-main .region-content {
+	font-family: 'signika', Calibri;
+	font-weight: 400;
+	font-size: 16px;
+}
+
+.adminonly {
+	width: 980px;
+	margin: 0 auto;
+	display: block;
+	border: 1px solid #FCC;
+	background-color: #FFF4F4;
+-webkit-border-radius: 15px;
+-moz-border-radius: 15px;
+border-radius: 15px;
+display: block;
+}
+.adminonly .block {
+	margin: 10px;
+	width: 250px;
+	background: white;
+	padding: 5px;
+	float: left;
+	display: block;
+}
+.row-fluid {
+	display: block;
+}
+.row-fluid:before, .row-fluid:after {
+display: table;
+line-height: 0;
+content: "";
+}
+
+#page-mod-page-view a.p_elearning {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/elearning]]) top no-repeat;
+	
+	text-decoration: none;
+	
+
+}
+
+#page-mod-page-view a.p_elearning:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+
+
+#page-mod-page-view a.p_partner {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/partner]]) top no-repeat;
+	
+	text-decoration: none;
+	
+
+}
+
+#page-mod-page-view a.p_partner:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.p_wymagania {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/wymagania]]) top no-repeat;
+	
+	text-decoration: none;
+	
+
+}
+
+#page-mod-page-view a.p_wymagania:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+
+
+
+
+
+#page-mod-page-view a.czym-sa-pkk {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/pkk-czym-sa]]) top no-repeat;
+	text-decoration: none;
+
+}
+
+#page-mod-page-view a.czym-sa-pkk:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.gdzie-znajde-osk {
+
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/gdzie-znajde-osk]]) top no-repeat;
+	text-decoration: none;
+	
+
+}
+
+#page-mod-page-view a.gdzie-znajde-osk:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.szkolenia-w-domu {
+	
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/szkolenia-w-domu]]) top no-repeat;
+	text-decoration: none;
+	
+
+}
+
+#page-mod-page-view a.szkolenia-w-domu:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+
+
+.block a.drukii {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/druki]]) top no-repeat;
+	text-decoration: none;
+}
+
+.block a.drukii:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+.block a.ob-szko {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/ob-szko]]) top no-repeat;
+	text-decoration: none;
+}
+
+.block a.ob-szko:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+.block a.ob-os-szkolonej {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/ob-os-szkolonej]]) top no-repeat;
+	text-decoration: none;
+}
+
+.block a.ob-os-szkolonej:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+
+
+
+#page-mod-page-view a.pkk-wstecz {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/pkk-wstecz]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	margin-bottom: 30px;
+}	
+
+#page-mod-page-view a.pkk-wstecz:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+
+#page-content a.kontakt_wstecz {
+	display: block;
+	width: 284px;
+	height: 376px;
+	background: transparent url([[pix:theme|page/kontakt]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	margin-bottom: 45px;
+}	
+
+#page-content a.kontakt_wstecz:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+
+#page-mod-page-view a.szkolenia-w-domu-wstecz {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/szkolenia-w-domu-wstecz]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	margin-bottom: 30px;
+}	
+
+#page-mod-page-view a.szkolenia-w-domu-wstecz:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.gdzie-znajde-wstecz {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/gdzie-znajde-wstecz]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	margin-bottom: 30px;
+}	
+
+#page-mod-page-view a.gdzie-znajde-wstecz:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.partnerem_wstecz {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/jak_partnerem_wstecz]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	
+}	
+
+#page-mod-page-view a.partnerem_wstecz:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.techni_wstecz {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/wymagania_techniczne_wstecz]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	
+}	
+
+#page-mod-page-view a.techni_wstecz:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.faq_wstecz {
+	display: block;
+	width: 287px;
+	height: 378px;
+	background: transparent url([[pix:theme|page/faq]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	
+}	
+
+#page-mod-page-view a.faq_wstecz:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view a.e_learning_back {
+	display: block;
+	width: 286px;
+	height: 377px;
+	background: transparent url([[pix:theme|page/elearning_wtecz]]) top no-repeat;
+	float: left;
+	text-decoration: none;
+	margin-right: 15px;
+	padding-right: 10px;
+	border-right: 2px solid #c6c6c6;
+	margin-left: 30px;
+	margin-bottom: 46px;
+}	
+
+#page-mod-page-view a.e_learning_back:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+#page-mod-page-view ul {
+	list-style-position: inside;
+	
+}
+#page-mod-page-view div.text {
+	margin-right: 40px;
+	text-align: justify;
+}
+
+#page-mod-page-view div.faq h3 {
+	color: #eftd00 !important;
+}
+
+#page-mod-page-view div.only_text {
+	margin-left: 50px;
+	margin-right: 40px;
+	text-align: justify;
+}
+
+
+/* niezalogowany */
+
+.unlogged a.logowanie {
+	display: block;
+	width: 286px;
+	height: 336px;
+	background: transparent url([[pix:theme|logowanie-log]]) top no-repeat;
+	text-decoration: none;
+}
+
+.unlogged a.logowanie:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+.unlogged a.oplatfo {
+	display: block;
+	width: 286px;
+	height: 336px;
+	background: transparent url([[pix:theme|oplatfo-log]]) top no-repeat;
+	text-decoration: none;
+}
+
+.unlogged a.oplatfo:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+.unlogged a.pkk {
+	display: block;
+	width: 286px;
+	height: 336px;
+	background: transparent url([[pix:theme|pkk-log]]) top no-repeat;
+	text-decoration: none;
+}
+
+.unlogged a.pkk:hover {
+	text-decoration: none;
+	background-position: bottom;
+}
+
+
+div.done {
+	display: none;
+}
+
+.error2 {
+	border-color: red;
+}
+
+#page-kontakt #contact {
+	position: absolute;
+	left: 330px;
+	top: 20px;
+	width: 384px;
+	height: 264px;
+
+	background: transparent url([[pix:theme|cform]]) top no-repeat;
+}
+
+
+#page-kontakt #contact input,
+#page-kontakt #contact textarea {
+	-webkit-border-radius: none !important;
+-moz-border-radius: none !important;
+border-radius: none !important;
+-webkit-box-shadow:none !important;
+-moz-box-shadow: none !important;
+box-shadow: none !important;
+font-family: signika;
+}
+
+
+#page-kontakt #contact #temat {
+	background: none !important;
+	border: none !important;
+	position: absolute;
+	margin-left: 0px;
+	left: 8px;
+	top: 8px;
+	height: 26px;
+	line-height: 26px;
+	text-indent: 44px;
+	width: 363px;
+	font-size: 12pt;
+}
+
+#page-kontakt #contact #tresc {
+	background: none !important;
+	border: none !important;
+	position: absolute;
+	left: 8px;
+	top: 52px;
+	height: 155px;
+	font-size: 12pt;
+	line-height: 18px;
+	text-indent: 42px;
+	width: 363px;
+	  resize: none; 
+}
+
+#page-kontakt #contact #email {
+	background: none !important;
+	border: none !important;
+	position: absolute;
+	left: 8px;
+	top: 224px;
+	height: 26px;
+	line-height: 26px;
+	text-indent: 71px;
+	width: 232px;
+	font-size: 12pt;
+	margin-left: 0px;
+}
+
+
+
+#page-kontakt #contact #submit {
+	background: url([[pix:theme|wyslij]]) top no-repeat;
+	border: none;
+	position: absolute;
+	right: 0px;
+	top: 216px;
+	width: 111px;
+	height: 41px;
+	padding: 0px;
+	line-height: 41px;
+	margin: 0px;
+	font-size: 14px;
+	color: #6f6f71;
+}
+
+#page-kontakt #contact #submit:hover {
+	background-position: 0px -47px;
+	color: #f2952a;
+}
+
+
+
+#page-kontakt #dane_1 {
+	text-align: right;
+font-family: signika;
+position: absolute;
+left: 690px;
+top: 28px;
+width: 205px;
+height: 200px;
+font-size: 12px;
+}
+
+#page-kontakt #dane_1 b{
+	font-size: 12px;
+}
+
+#page-kontakt #dane_2 {
+	text-align: left;
+font-family: signika;
+position: absolute;
+left: 345px;
+top: 290px;
+width: 555px;
+height: 100px;
+font-size: 12px;
+}
+
+#page-kontakt #dane_2 .l {
+	display: block;
+	position: absolute;
+	top: 22px;
+	left: 0px;
+	width: 280px;
+	font-size: 12px;
+}
+
+#page-kontakt #dane_2 .r {
+	display: block;
+	position: absolute;
+	top: 22px;
+	left: 310px;
+	width: 240px;
+	font-size: 12px;
+}
+#page-kontakt #contact #tresc.error2,
+#page-kontakt #contact #email.error2,
+#page-kontakt #contact #temat.error2,
+#page-kontakt #contact input.error2 {
+	border: 2px solid #ff0000 !important;
+}
+
+#page-footer div.links a,
+#page-footer div.links a:link,
+#page-footer div.links a:visited {
+color: #000;
+font-family: signika;
+font-size: 13px;
+line-height: 50px;
+}
+
+#page-footer div.links a.kontakt {
 	float: right;
 	display: block;
-	width: 116px;
+	width: 115px;
 	height: 40px;
 	background-image:  url([[pix:theme|kontakt]]);
 	background-position: top;
 	background-repeat: no-repeat;
+	font-family: signika;
+	color: #000;
+	text-indent: 31px;
 }
 
-div.links a.faq {
+#page-footer div.links a.faq {
 	float: right;
 	display: block;
-	width: 118px;
+	width: 115px;
 	height: 40px;
 	background-image:  url([[pix:theme|faq]]);
-	background-position: bottom;
-	background-repeat: no-repeat;
-}
-
-div.links a.kontakt:hover {
-	background-position: bottom;
-}
-
-
-div.links a.faq:hover {
 	background-position: top;
+	background-repeat: no-repeat;
+	font-family: signika;
+	color: #000;
+	text-indent: 22px;
+}
+
+#page-footer div.links a.kontakt:hover {
+	background-position: bottom;
+	color: #fff;
+}
+
+
+#page-footer div.links a.faq:hover {
+	background-position: bottom;
+	color: #fff;
 }

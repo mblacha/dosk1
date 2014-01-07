@@ -50,7 +50,11 @@ $table->sortable(false);
 $table->setup();
 
 $partnercoursemanager = new block_int_partnercourse_manager();
-$courses = $partnercoursemanager->block_int_partnercourse_courses($USER->id);
+if(is_siteadmin()){
+	$courses = $partnercoursemanager->block_int_partnercourse_courses(required_param('partnerid', PARAM_INTEGER));
+} else {
+	$courses = $partnercoursemanager->block_int_partnercourse_courses($USER->id);
+}
 
 $fieldid = $DB->sql_concat('hostid', "'-'" , 'remotecourseid');
 $partnerenrols = $DB->get_records('mnetservice_enrol_enrolments', 
@@ -72,9 +76,9 @@ foreach($courses as $course){
 			array('hostid'=>$course->hostid, 'wantsurl'=>'/blocks/int_partnercoursenet/course.php?username='.$course->username.
 					'&amp;user='.$USER->id.'&amp;course='.$course->remoteid));
 	
-	//$action = html_writer::start_tag('div', array('class' => 'buttons'));
+	
 	$action = $OUTPUT->single_button($detailsurl, get_string('details', 'block_int_partnercourse'), 'get');
-	//$action .= html_writer::end_tag('div');
+	
 	
 	$table->add_data(array($i, $course->firstname.' '.$course->lastname, $course->pesel, $course->fullname, $action));
 }

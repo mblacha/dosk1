@@ -46,7 +46,12 @@ $table->sortable(false);
 $table->setup();
 
 $partnerusermanager = new block_int_partneruser_manager();
-$users = $partnerusermanager->block_int_partneruser_users($USER->id);
+if(is_siteadmin()){
+	$users = $partnerusermanager->block_int_partneruser_users(required_param('partnerid', PARAM_INTEGER));
+} else {
+	$users = $partnerusermanager->block_int_partneruser_users($USER->id);
+}
+
 
 
 echo $OUTPUT->header();
@@ -58,9 +63,8 @@ foreach($users as $user){
 	
 	$addurl = new moodle_url('/blocks/int_partneruser/profil.php', array('id'=>$user->id));
 	
-	//$action = html_writer::start_tag('div', array('class' => 'buttons'));
+
 	$action = $OUTPUT->single_button($addurl, get_string('details', 'block_int_partneruser'), 'get');
-	//$action .= html_writer::end_tag('div');
 	
 	$table->add_data(array($i, $user->firstname.' '.$user->lastname, $user->pesel, $action));
 }

@@ -1,18 +1,14 @@
 <?php
-
 $hassidepre = $PAGE->blocks->region_has_content('side-pre', $OUTPUT);
 $hassidepost = $PAGE->blocks->region_has_content('side-post', $OUTPUT);
 $showsidepre = $hassidepre && !$PAGE->blocks->region_completely_docked('side-pre', $OUTPUT);
 $showsidepost = $hassidepost && !$PAGE->blocks->region_completely_docked('side-post', $OUTPUT);
-
 $hassidetop1 = $PAGE->blocks->region_has_content('top-1', $OUTPUT);
 $hassidetop2 = $PAGE->blocks->region_has_content('top-2', $OUTPUT);
 $hassidetop3 = $PAGE->blocks->region_has_content('top-3', $OUTPUT);
-//$hassidetop4 = $PAGE->blocks->region_has_content('top-4', $OUTPUT);
 $hassidebot1 = $PAGE->blocks->region_has_content('bot-1', $OUTPUT);
 $hassidebot2 = $PAGE->blocks->region_has_content('bot-2', $OUTPUT);
 $hassidebot3 = $PAGE->blocks->region_has_content('bot-3', $OUTPUT);
-//$hassidebot4 = $PAGE->blocks->region_has_content('bot-4', $OUTPUT);
 $top_blocks = 0;
 if($hassidetop1){
 	$top_blocks++;
@@ -20,24 +16,14 @@ if($hassidetop1){
 		$top_blocks++;
 		if($hassidetop3){
 			$top_blocks++;
-		  /*	if($hassidetop4){
-				$top_blocks++;
-			} */
 		}
 	}
 }
 
 switch ($top_blocks){
-
-case 1: $top_width = "980px"; break;
-case 2: $top_width = "480px"; break;
-case 3: $top_width = "320px"; break;
-//case 4: $top_width = "238px"; break; 
-/*
-case 1: $top_width = "796px"; break;
-case 2: $top_width = "390px"; break;
-case 3: $top_width = "259px"; break;
-case 4: $top_width = "195px"; break;  */
+	case 1: $top_width = "980px"; break;
+	case 2: $top_width = "480px"; break;
+	case 3: $top_width = "320px"; break;
 default: break;}
 
 $bot_blocks = 0;
@@ -47,9 +33,6 @@ if($hassidebot1){
 		$bot_blocks++;
 		if($hassidebot3){
 			$bot_blocks++;
-		  /*	if($hassidebot4){
-				$bot_blocks++;
-			} */
 		}
 	}
 }
@@ -57,7 +40,6 @@ switch ($bot_blocks){
 case 1: $bot_width = "980px"; break;
 case 2: $bot_width = "480px"; break;
 case 3: $bot_width = "320px"; break;
-//case 4: $bot_width = "238px"; break;
 default: break;}
 
 
@@ -103,74 +85,75 @@ echo $OUTPUT->doctype() ?>
 
 <!-- START OF HEADER -->
     <div id="page-header" class="clearfix">
-	 <a href="<?php echo $CFG->wwwroot; ?>" title="Strona główna">
+	 <a href="http://dobreosk.pl/" title="Strona główna">
         <h1 class="headermain"><img src="<?php echo $OUTPUT->pix_url('logo', 'theme'); ?>" alt="dobreOSK"></h1></a>
 		  
 		  <div class="mainlink" >
-		  	  <a href="<?php echo $CFG->wwwroot; ?>" title="Strona główna">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="" >Platforma szkoleniowa dla OSK </a>
+		  	  <a href="http://dobreosk.pl/" title="Strona główna">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="" >Platforma szkoleniowa dla OSK </a>
 			</div>	
 			
 			<div id="menu_dosk">
-				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=2"; ?>">PKK</a>
-				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=7"; ?>">O platformie</a>
-				<a href="<?php echo $CFG->wwwroot."/mod/page/view.php?id=11"; ?>">Regulamin</a>
+				<a href="http://dobreosk.pl/pkk">PKK</a>
+				<a href="http://dobreosk.pl/o-platformie">O platformie</a>
+				<a href="http://dobreosk.pl/regulamin">Regulamin</a>
 				<?php
 				if(!$USER->id){
-				echo '<a href="'.$CFG->wwwroot.'/login/index.php">Logowanie</a>';
+				echo '<a href="http://dobreosk.pl/auth/int_keygen/" class="log_in">Zaloguj</a>';
 				} else {
 				echo '<a href="'.$CFG->wwwroot.'/user/profile.php?id='.$USER->id.'">Twój profil</a>';
+				echo '<a href="'.$CFG->wwwroot.'/login/logout.php?sesskey='.sesskey().'" class="log_out">Wyloguj</a>';
 				}
 				?>
 				
 			</div>
-			<?php 
-			/*
-        <div class="headermenu"><?php
-            echo $OUTPUT->login_info();
-            //echo $OUTPUT->lang_menu();
-            echo $PAGE->headingmenu;
-        ?></div>
-        
 			
-		  <div class="menutop">	
-				<table>
-					<tbody><tr>
-						<td>
-							<a href="<?php echo $CFG->wwwroot; ?>">&gt; Strona główna</a><br>
-							<a href="<?php echo $CFG->wwwroot; ?>/mod/page/view.php?id=5">&gt; O Nas</a><br>
-							<a href="<?php echo $CFG->wwwroot; ?>/mod/page/view.php?id=29">&gt; Kontakt</a>
-						</td>
-						<td>
-							<a href="http://sklep.sphcredo.pl/" target="_blank">&gt; Sklep online</a><br>
-							<a href="http://portalnaukijazdy.pl/forum_new/" target="_blank">&gt; Forum</a><br>
-							<a href="<?php echo $CFG->wwwroot; ?>/mod/page/view.php?id=26">&gt; Infolinia ekspercka</a>
-						</td>
-					</tr>
-				</tbody></table>
-			</div>
-			*/ ?>
 			
 			
     </div>
-	 
-	 <?php
-	 /* if ($hascustommenu) { ?>
-    	<div id="menu">
-	     <div id="custommenu"><?php echo $custommenu; ?></div>
-		</div>
-    <?php } */ 
-	 
-	 ?>
-	 
-	 
-			
 <!-- END OF HEADER -->
 
 
 <!-- START OF TOP -->	 
-<?php if ($hassidetop1 OR $hassidetop2 OR $hassidetop3 OR $hassidetop4) { 
+<?php if ($hassidetop1 OR $hassidetop2 OR $hassidetop3) { 
 
+
+if(is_siteadmin()){
+  
 ?>
+	<script type="text/javascript">
+	var toggle = function(thediv) {
+  var mydiv = document.getElementById(thediv);
+  
+  if (mydiv.style.display === 'block' || mydiv.style.display === null)
+    mydiv.style.display = 'none';
+  else
+    mydiv.style.display = 'block'
+  }
+	</script>
+	
+
+<a onclick="toggle('region-top');" class="button submit">Pokaż/ukryj bloki</a>
+		 
+<?php  
+}
+
+if(is_siteadmin() && !isset($USER->editing)){ ?>
+
+<style type="text/css">
+		#region-top {
+			display: none;
+		}
+	</style>
+<?php }  elseif(is_siteadmin() && $USER->editing==1){ ?>
+	<style type="text/css">
+		#region-top {
+			display: block;
+		}
+	</style>
+<?php 
+}
+?>
+
 
 	<div class="clearfix" style="width: 100%; height: 10px; display: block; float: left;"></div>
 	
@@ -203,16 +186,7 @@ echo $OUTPUT->doctype() ?>
 							echo '</div>';
 							}		
 							
-							
-						  /*	if($hassidetop4 && ($hassidetop3 OR $hassidetop2 OR $hassidetop1)) {
-								echo '<div class="top-spacer"></div>';
-							}
-							
-						 	if($hassidetop4){
-							echo '<div id="region-top-4" style="width: '.$top_width.';">';
-							echo $OUTPUT->blocks_for_region('top-4');
-							echo '</div>';
-							}	   */			
+			
                     ?>
                     
 							</div>
@@ -222,6 +196,32 @@ echo $OUTPUT->doctype() ?>
 					 
 <?php } ?>	 
 <!-- END OF TOP -->
+
+<?php
+if(!$USER->id) {
+	?>
+	<div class="clearfix"></div>
+	<div class="unlogged">
+	<table border="0" width="100%" align="center">
+		<tr>
+			<td align="center">
+				<a href="http://dobreosk.pl/pkk" class="pkk"></a>
+			</td>
+			<td align="center">
+				<a href="http://dobreosk.pl/auth/int_keygen/" class="logowanie"></a>
+			</td>
+			<td align="center">
+				<a href="http://dobreosk.pl/o-platformie" class="oplatfo"></a>
+			</td>
+		</tr>
+	</table>
+	</div>
+	<div class="clearfix"></div>
+	<?php
+}
+?>
+
+
 
 <!-- START OF CONTENT -->
    <div id="page-content">
@@ -301,16 +301,7 @@ echo $OUTPUT->doctype() ?>
 							echo '</div>';
 							}		
 							
-							
-						 /*	if($hassidebot4 && ($hassidebot3 OR $hassidebot2 OR $hassidebot1)) {
-								echo '<div class="bot-spacer"></div>';
-							}
-							
-							if($hassidebot4){
-							echo '<div id="region-bot-4" style="width: '.$bot_width.';">';
-							echo $OUTPUT->blocks_for_region('bot-4');
-							echo '</div>';
-							}			   */	
+
                     ?>
                     
 							</div>
@@ -331,8 +322,8 @@ echo $OUTPUT->doctype() ?>
 ?>
 	 
 	 	<div class="links">	
-	 			<a href="http://dobreosk.pl/mod/page/view.php?id=12" class="faq"></a>
-				<a href="http://dobreosk.pl/mod/page/view.php?id=13" class="kontakt"></a>
+	 			<a href="http://dobreosk.pl/faq" class="faq">Faq</a>
+				<a href="http://dobreosk.pl/kontakt" class="kontakt">Kontakt</a>
 	 		</div>
 	 
         	  

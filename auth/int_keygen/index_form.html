@@ -13,10 +13,44 @@ if (!empty($CFG->loginpasswordautocomplete)) {
       <div class="subcontent loginsub">
         <?php
           if (!empty($errormsg)) {
+			 
+			 ?><script>
+			 	function closeBox() {
+  						jQuery.colorbox.close();
+						jQuery('form:first *:input[type!=hidden]:first').focus();
+					}
+			 
+			 	jQuery(window).load(function() {
+					jQuery(".inline").colorbox({inline:true,close: "",speed: 0, transition: 'none'});
+				 	jQuery('a.inline:first').trigger('click');
+					
+					
+				});
+
+			 </script>			
+			 <div style="display: none;">
+			 	<a href="#error_login" class="inline"></a> 
+				
+				<div id="error_login">
+					<div class="loger">
+						
+						<div class="altxt">
+						<div class="imgalert"></div>
+						<?php echo $errormsg; ?>
+							<br>
+							<a href="#" onclick="javascript:closeBox();" class="buttonstyle">Logowanie</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+				</div>
+				
+			 </div> <?php 
+			 /*
              // echo html_writer::start_tag('div', array('class' => 'loginerrors'));
              // echo html_writer::link('#', $errormsg, array('id' => 'loginerrormessage', 'class' => 'accesshide'));
               echo $OUTPUT->error_text($errormsg);
-            //  echo html_writer::end_tag('div');
+            //  echo html_writer::end_tag('div'); */
           }
         ?>
         <form action="<?php echo $CFG->httpswwwroot; ?>/auth/int_keygen/index.php" method="post" id="login" <?php echo $autocomplete; ?> >

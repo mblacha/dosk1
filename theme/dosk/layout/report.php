@@ -22,6 +22,7 @@ echo $OUTPUT->doctype() ?>
     <link rel="shortcut icon" href="<?php echo $OUTPUT->pix_url('favicon', 'theme')?>" />
     <meta name="description" content="<?php p(strip_tags(format_text($SITE->summary, FORMAT_HTML))) ?>" />
     <?php echo $OUTPUT->standard_head_html() ?>
+	 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Signika%20Negative">
 </head>
 <body id="<?php p($PAGE->bodyid) ?>" class="<?php p($PAGE->bodyclasses.' '.join(' ', $bodyclasses)) ?>">
 <?php echo $OUTPUT->standard_top_of_body_html() ?>
@@ -31,25 +32,28 @@ echo $OUTPUT->doctype() ?>
 
 <!-- START OF HEADER -->
     <div id="page-header" class="clearfix">
-        <h1 class="headermain"><img src="<?php echo $OUTPUT->pix_url('logo', 'theme'); ?>" alt="dobreOSK"></h1>
-		  <div class="logotxt">
-		  	Profesjonalne kursy dla kierowców	
+	 <a href="<?php echo $CFG->wwwroot; ?>" title="Strona główna">
+        <h1 class="headermain"><img src="<?php echo $OUTPUT->pix_url('logo', 'theme'); ?>" alt="dobreOSK"></h1></a>
+		  
+		  <div class="mainlink" >
+		  	  <a href="http://dobreosk.pl/" title="Strona główna">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="" >Platforma szkoleniowa dla OSK </a>
 			</div>	
-		  <div class="mainlink">
-		  	  <a href="<?php echo $CFG->wwwroot; ?>">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="">Platforma szkoleniowa dla OSK </a>
-			</div>	
-        <div class="headermenu"><?php
-            echo $OUTPUT->login_info();
-            //echo $OUTPUT->lang_menu();
-            echo $PAGE->headingmenu;
-        ?></div>
-        
-
 			
+		  		<div id="menu_dosk">
+				<a href="http://dobreosk.pl/pkk">PKK</a>
+				<a href="http://dobreosk.pl/o-platformie">O platformie</a>
+				<a href="http://dobreosk.pl/regulamin">Regulamin</a>
+				<?php
+				if(!$USER->id){
+				echo '<a href="http://dobreosk.pl/auth/int_keygen/" class="log_in">Zaloguj</a>';
+				} else {
+				echo '<a href="'.$CFG->wwwroot.'/user/profile.php?id='.$USER->id.'">Twój profil</a>';
+				echo '<a href="'.$CFG->wwwroot.'/login/logout.php?sesskey='.sesskey().'" class="log_out">Wyloguj</a>';
+				}
+				?>
+				
+			</div>
     </div>
-	 
- 
-			
 <!-- END OF HEADER -->
 
 
@@ -79,8 +83,10 @@ echo $OUTPUT->doctype() ?>
 			</div>
     </div>
 <!-- END OF CONTENT -->
-	 
+	 <?php echo $OUTPUT->main_content() ?>
 
+	 
+	 </div>
 <?php echo $OUTPUT->standard_end_of_body_html() ?>
 </body>
 </html>

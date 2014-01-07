@@ -36,3 +36,28 @@ $string['errorpesel'] = 'Incorrect Pesel';
 $string['profiltitle'] = 'Details';
 $string['profiledit'] = 'Edit user';
 
+$string['formusertitleperson'] = '';
+$string['formuserfirstname'] = '';
+$string['formuserlastname'] = '';
+$string['formuserpesel'] = '';
+$string['formuserpeselno'] = '';
+$string['formuserdateofbirth'] = '';
+$string['formuserplaceofbirth'] = '';
+$string['formusertitleauth'] = '';
+$string['formusernumberdriver'] = '';
+$string['formusercategorydriver'] = '';
+$string['formusertitleaddress'] = '';
+$string['formuserpostcode'] = '';
+$string['formuserstreet'] = '';
+$string['formuserno1'] = '';
+$string['formuserno2'] = '';
+$string['formuserphone'] = '';
+$string['formusertitlecert'] = '';
+$string['formusernumbercert'] = '';
+$string['formusernumbercertno'] = '';
+$string['formusercatcert'] = '';
+$string['formusercatcertno'] = '';
+$string['formusersave'] = '';
+$string['formuserback'] = '';
+
+

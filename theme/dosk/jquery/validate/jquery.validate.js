@@ -279,11 +279,11 @@ $.extend($.validator, {
 	},
 
 	messages: {
-		required: "This field is required.",
+		required: "To pole jest wymagane.",
 		remote: "Please fix this field.",
-		email: "Please enter a valid email address.",
+		email: "Podaj poprawny adres email.",
 		url: "Please enter a valid URL.",
-		date: "Please enter a valid date.",
+		date: "Podaj poprawną datę.",
 		dateISO: "Please enter a valid date (ISO).",
 		number: "Please enter a valid number.",
 		digits: "Please enter only digits.",
@@ -1229,3 +1229,4 @@ $.format = $.validator.format;
 		}
 	});
 }(jQuery));
+

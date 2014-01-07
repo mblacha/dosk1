@@ -35,4 +35,30 @@ $string['profiledit'] = 'Edycja danych';
 
 $string['errorpesel'] = 'Niepoprawny Pesel';
 
+$string['formusertitleperson'] = 'DANE OSOBOWE';
+$string['formuserfirstname'] = 'IMIĘ (IMIONA)';
+$string['formuserlastname'] = 'NAZWISKO';
+$string['formuserpesel'] = 'PESEL';
+$string['formuserpeselno'] = 'brak PESELU';
+$string['formuserdateofbirth'] = 'DATA URODZENIA';
+$string['formuserplaceofbirth'] = 'MIEJSCE URODZENIA';
+
+$string['formusertitleaddress'] = 'DANE ADRESOWE';
+$string['formuserpostcode'] = 'KOD POCZTOWY / MIEJSCOWOŚĆ';
+$string['formuserstreet'] = 'ULICA';
+$string['formuserno1'] = 'NUMER DOMU';
+$string['formuserno2'] = 'NUMER MIESZKANIA';
+$string['formuserphone'] = 'NR TELEFONU';
+
+$string['formusertitleauth'] = 'DODATKOWE UPRAWNIENIA';
+$string['formusernumberdriver'] = 'NUMER PRAWA JAZDY';
+$string['formusercategorydriver'] = 'KATEGORIE PRAWA JAZDY';
+
+$string['formusertitlecert'] = 'ŚWIADECTWO KWALIFIKACJI ZAWODOWEJ';
+$string['formusernumbercert'] = 'NUMER ŚWIADECTWA';
+$string['formusernumbercertno'] = 'nie<br>dotyczy';
+$string['formusercatcert'] = 'W ZAKRESIE KATEGORII';
+$string['formusercatcertno'] = 'nie<br>dotyczy';
+$string['formusersave'] = 'ZAPISZ';
+$string['formuserback'] = 'WRÓĆ';
 

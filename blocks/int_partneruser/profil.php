@@ -6,11 +6,20 @@ require_once($CFG->dirroot . '/user/profile/lib.php');
 
 require_login();
 
-$blockid = required_param('blockid', PARAM_INT);// instance of block
 $userid = required_param('id', PARAM_INT);
 
 $course = $DB->get_record('course', array('id' => SITEID), '*', MUST_EXIST);
-$blockcontext = get_context_instance(CONTEXT_BLOCK, $blockid);
+
+if(class_exists('context_course')) {
+	$context  = context_course::instance($course->id);
+}
+else {
+	$context  = get_context_instance(CONTEXT_COURSE, $course->id);
+}
+
+if($block = $DB->get_record('block_instances', array('parentcontextid'=>$context->id, 'blockname'=>'int_partneruser'))){
+	$blockcontext = get_context_instance(CONTEXT_BLOCK, $block->id);
+}
 
 require_capability('moodle/block:view', $blockcontext); 
 
@@ -29,7 +38,7 @@ if ((!$user = $DB->get_record('user', array('id' => $userid))) || ($user->delete
 /// Load the Custom User Fields
 profile_load_data($user);
 
-$partneruser = ($user->idnumber == $USER->id);
+$partneruser = ($user->idnumber == $USER->id) || is_siteadmin();
 $context = $usercontext = context_user::instance($userid, MUST_EXIST);
 
 if (!$partneruser) {
@@ -53,10 +62,10 @@ $PAGE->set_title($title);
 $PAGE->set_heading($title);
 $PAGE->navbar->add(get_string('blocks'));
 $PAGE->navbar->add(get_string('pluginname', 'block_int_partneruser'));
-$PAGE->navbar->add(get_string('users', 'block_int_partneruser'), new moodle_url('/blocks/int_partneruser/users.php', array('id'=>$blockid)));
+$PAGE->navbar->add(get_string('users', 'block_int_partneruser'), new moodle_url('/blocks/int_partneruser/users.php'));
 $PAGE->navbar->add($title);
 $PAGE->set_course($course);
-$PAGE->set_url('/blocks/int_partneruser/users.php', array('id'=>$blockid, 'userid'=>$user->id));
+$PAGE->set_url('/blocks/int_partneruser/users.php', array('userid'=>$user->id));
 $PAGE->set_pagelayout('course');
 
 echo $OUTPUT->header();
@@ -79,7 +88,7 @@ echo html_writer::tag('dt', get_string('pesel', 'block_int_partneruser'));
 echo html_writer::tag('dd', $user->profile_field_pesel);
 echo html_writer::end_tag('dl');
 
-$editurl = new moodle_url('/blocks/int_partneruser/user.php', array('blockid'=>$blockid, 'id'=>$user->id));
+$editurl = new moodle_url('/blocks/int_partneruser/user.php', array('id'=>$user->id));
 echo html_writer::start_tag('div', array('class' => 'buttons'));
 echo $OUTPUT->single_button($editurl, get_string('edit'), 'get');
 echo  html_writer::end_tag('div');

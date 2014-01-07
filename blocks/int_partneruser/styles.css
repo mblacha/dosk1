@@ -1,3 +1,5 @@
+
+
 #page-blocks-int_partneruser-search div.region-content  div.add_user_form {
 	display: block;
 	width: 422px;
@@ -161,15 +163,286 @@ span#id_error_lastname {
 }
 
 #page-blocks-int_partneruser-users div.no-overflow {
-border-top: 4px solid #f07d00;
+	border-top: 4px solid #f07d00;
 	-webkit-border-top-left-radius: 4px;
--webkit-border-top-right-radius: 4px;
--moz-border-radius-topleft: 4px;
--moz-border-radius-topright: 4px;
-border-top-left-radius: 4px;
-border-top-right-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	-moz-border-radius-topleft: 4px;
+	-moz-border-radius-topright: 4px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
 }
 
 #page-blocks-int_partneruser-users table.int_partneruser tr td {
 	border-color: #e8e9e9;
 }
+
+#page-blocks-int_partneruser-user div {
+	border: 0px solid red;	
+}
+
+#page-blocks-int_partneruser-user .mform .fitem .fitemtitle {
+}
+
+#page-blocks-int_partneruser-user .mform label {
+	font-size:0.9em;
+}
+
+#page-blocks-int_partneruser-user .mform .fitem .fitemtitle {
+	width:15%;
+	text-align:left;
+	float:left;
+	background: #e5e5e5;	
+	height: 20px;
+}
+
+#page-blocks-int_partneruser-user .mform .fitem .fitemtitle label {
+	margin: 3px 10px;
+	display:inline-block;	
+}
+
+#page-blocks-int_partneruser-user .mform .person {
+	border: 0px solid red;
+}
+
+#page-blocks-int_partneruser-user .mform .title {	
+	border-bottom: 2px solid #cecece;
+	color: #cecece;
+	font-weight: bold;	
+	padding: 2px;		
+}
+
+#page-blocks-int_partneruser-user .mform .fitem label {
+	display:inline; 
+	float:none; 
+	vertical-align:baseline;
+}
+
+/* person */
+
+#page-blocks-int_partneruser-user .mform .person {
+	float: left;
+	width: 45%;
+	margin-top: 10px;	
+}
+
+#page-blocks-int_partneruser-user .mform .person .fitem .fitemtitle {
+	width: 210px;
+	text-align: left;	
+	padding: 0px;
+	margin: 0px;
+}
+
+#page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel .fitemtitle{
+	display:none; 
+}
+
+
+#page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel{
+	display:inline; 
+	margin: 0;	
+}
+
+#page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel .felement{
+	display:inline; 
+	margin: 0;	
+}
+
+#page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel .felement input{
+	margin-left': 7;	
+}
+
+#page-blocks-int_partneruser-user .mform .person .peselno{
+	font-size:0.9em;
+	margin-top: 5px;
+}
+
+
+/* address */
+
+#page-blocks-int_partneruser-user .mform .address {
+	float: left;
+	width: 45%;
+	margin-top: 10px;
+	margin-left: 9%;
+}
+
+#page-blocks-int_partneruser-user .mform .address .fitem .fitemtitle {
+	width: 210px;
+	text-align: left;	
+	padding: 0px;
+	margin: 0px;
+}
+
+
+/* auth */
+
+#page-blocks-int_partneruser-user .mform .auth {
+	float: left;
+	width: 45%;
+	margin-top: 10px;
+}
+
+
+#page-blocks-int_partneruser-user .mform .auth .fitem .fitemtitle {
+	width: 170px;
+	text-align: left;	
+	padding: 0px;
+	margin: 0px;
+}
+
+#page-blocks-int_partneruser-user .mform .auth .fitem .felement {
+	margin: 0;
+	display: inline;
+}
+
+
+#page-blocks-int_partneruser-user .mform .auth .category {
+	float: left;	
+	width: 230px;
+	border: 1px solid #cecece;
+	margin-left: 10px;
+	padding: 5px;
+}
+
+
+#page-blocks-int_partneruser-user .mform .auth .category .fitem {
+	display: inline;
+	padding: 0px;	
+	margin-left: 5px;
+	border: 0px solid red;
+}
+
+#page-blocks-int_partneruser-user .mform .auth .category .fitem .fitemtitle {
+	display: none;
+}
+
+
+#page-blocks-int_partneruser-user .mform .auth .category .fitem .fcheckbox input {
+	margin: 0;
+	padding: 0;	
+}
+
+
+/* certificate */
+
+
+#page-blocks-int_partneruser-user .mform .certificate {
+	float: left;
+	width: 45%;
+	margin-top: 10px;
+	margin-left: 9%;
+}
+
+#page-blocks-int_partneruser-user .mform .certificate .fitem {
+	display: inline;
+	margin-top: 5px;
+}
+
+
+#page-blocks-int_partneruser-user .mform .certificate .fitem .fitemtitle {
+	width: 170px;
+	text-align: left;	
+	padding: 0px;
+	margin: 0px;
+}
+
+#page-blocks-int_partneruser-user .mform .certificate .fitem .felement {
+	margin: 0;
+	display: inline;
+}
+
+
+#page-blocks-int_partneruser-user .mform .certificate .category {
+	float: left;	
+	width: 160px;
+	border: 1px solid #cecece;
+	margin-left: 10px;
+	padding: 5px;
+}
+
+
+#page-blocks-int_partneruser-user .mform .certificate .category .fitem {
+	display: inline;
+	padding: 0px;	
+	margin-left: 5px;	
+}
+
+#page-blocks-int_partneruser-user .mform .certificate .category .fitem .fitemtitle {
+	display: none;
+}
+
+
+#page-blocks-int_partneruser-user .mform .certificate .category .fitem .fcheckbox input {
+	margin: 0;
+	padding: 0;	
+}
+
+#page-blocks-int_partneruser-user .mform .certificate .nrswiadectwano,
+#page-blocks-int_partneruser-user .mform .certificate .katswiadectwano {
+	margin-left: 5px;
+	font-size:0.9em;
+	border: 0px solid #cecece;
+	display: inline-block;
+}
+
+#page-blocks-int_partneruser-user .mform .person .peselno .fitemtitle,
+#page-blocks-int_partneruser-user .mform .certificate .nrswiadectwano .fitemtitle,
+#page-blocks-int_partneruser-user .mform .certificate .katswiadectwano .fitemtitle {
+	display: none;
+}
+
+
+#page-blocks-int_partneruser-user .mform .certificate .nrswiadectwano .felement,
+#page-blocks-int_partneruser-user .mform .certificate .katswiadectwano .felement {
+
+}
+
+#page-blocks-int_partneruser-user .mform .person .peselno .felement input {
+	position: relative;
+	top: 3px;
+}
+
+
+#page-blocks-int_partneruser-user .mform .certificate .katswiadectwano {
+	margin-left: 7px;
+	margin-top: 15px;
+}
+
+
+#page-blocks-int_partneruser-user .mform .calendar {
+	 background: white url([[pix:theme|calendar]]) right no-repeat;
+	 
+}
+
+#page-blocks-int_partneruser-user .mform .fitem_fsubmit {
+	padding: 10px;	
+	width: 98%;
+}
+
+#page-blocks-int_partneruser-user .mform .first_line,
+#page-blocks-int_partneruser-user .mform .second_line {
+	width: 100%;
+	float: left;
+}
+
+#page-blocks-int_partneruser-user .mform .fbutton {
+	padding: 5px;
+	float: right;
+}
+
+#page-blocks-int_partneruser-user .mform .person .ftext {	
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 215px;
+}
+
+#page-blocks-int_partneruser-user .mform .address .ftext {	
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 215px;
+}
+
+
+
