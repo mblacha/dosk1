@@ -43,6 +43,7 @@ $string['formuserpesel'] = '';
 $string['formuserpeselno'] = '';
 $string['formuserdateofbirth'] = '';
 $string['formuserplaceofbirth'] = '';
+$string['formuserpkk'] = 'PKK';
 $string['formusertitleauth'] = '';
 $string['formusernumberdriver'] = '';
 $string['formusercategorydriver'] = '';

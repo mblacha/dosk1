@@ -61,7 +61,11 @@ $(function() {
         }                
     });  
     
-    
+    $(".postcode").mask("99-999");
+    $(".calendar").mask("99-99-9999");       
+    $(".street").mask("ul.?*********************************************",{placeholder:" "});
+    $(".pkk").mask("99999999999999999999999999");
+
 	
 	$('input, text').placeholder();   
 	

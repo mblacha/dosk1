@@ -55,7 +55,7 @@ class PartnerUserForm_Renderer extends MoodleQuickForm_Renderer {
 
 				'actionbuttons'=>"\n\t\t".'<div id="{id}" class="fitem fitem_actionbuttons fitem_{type}"><div class="felement {type}">{element}</div></div>',
 
-				'fieldset'=>"\n\t\t".'<div id="{id}" class="fitem {advanced}<!-- BEGIN required --> required<!-- END required --> fitem_{type}"><div class="fitemtitle"><div class="fgrouplabel"><label>{label}<!-- BEGIN required -->{req}<!-- END required -->{advancedimg}{help} </label></div></div><fieldset class="felement {type}<!-- BEGIN error --> error<!-- END error -->"><!-- BEGIN error --><span class="error">{error}</span><br /><!-- END error -->{element}</fieldset></div>',
+				'fieldset'=>"\n\t\t".'<div id="{id}" class="fitem {advanced}<!-- BEGIN required --> required<!-- END required --> fitem_{type}"><div class="fitemtitle"><div class="fgrouplabel"><label>{label}<!-- BEGIN required -->{req}<!-- END required -->{advancedimg}{help} </label></div></div><div class="felement {type}<!-- BEGIN error --> error<!-- END error -->"><!-- BEGIN error --><span class="error">{error}</span><br /><!-- END error -->{element}</div></div>',
 
 				'static'=>"\n\t\t".'<div class="fitem {advanced}"><div class="fitemtitle"><div class="fstaticlabel"><label>{label}<!-- BEGIN required -->{req}<!-- END required -->{advancedimg}{help} </label></div></div><div class="felement fstatic <!-- BEGIN error --> error<!-- END error -->"><!-- BEGIN error --><span class="error">{error}</span><br /><!-- END error -->{element}&nbsp;</div></div>',
 
@@ -287,8 +287,8 @@ class user_partneruser_edit_form extends moodleform {
         /* dane osobowe */
         $mform->addElement('html', '<div class="person">');
         $mform->addElement('html', '<div class="title">'.get_string('formusertitleperson', 'block_int_partneruser').'</div>');
-        $mform->addElement('text', 'lastname',  get_string('formuserlastname', 'block_int_partneruser'),  'maxlength="100" size="34"');
-        $mform->addElement('text', 'firstname', get_string('formuserfirstname', 'block_int_partneruser'), 'maxlength="100" size="34"');
+        $mform->addElement('text', 'lastname',  get_string('formuserlastname', 'block_int_partneruser'),  'maxlength="100" style="width: 195px;" ');
+        $mform->addElement('text', 'firstname', get_string('formuserfirstname', 'block_int_partneruser'), 'maxlength="100" style="width: 195px;" ');
         //$mform->addRule('firstname', $strrequired, 'required', null, 'client');
         $mform->setType('firstname', PARAM_NOTAGS);
         
@@ -301,7 +301,7 @@ class user_partneruser_edit_form extends moodleform {
         			
         			if($field->shortname == 'pesel'){
         				
-        				$mform->addElement('html', '<div class="fitem fitem_ftext">');
+        				$mform->addElement('html', '<div class="fitem fitem_ftext" id="fitem_id_pesel" >');
         			
         				$mform->addElement('html', '<div class="fitemtitle"><label>'.
         						get_string('formuserpesel', 'block_int_partneruser').'</label>');   
@@ -316,7 +316,7 @@ class user_partneruser_edit_form extends moodleform {
         				
         				$mform->addElement('html', '</div>');        				
         				
-        				$mform->addElement('text', 'profile_field_'.$field->shortname, '', 'maxlength="100" size="34" ');
+        				$mform->addElement('text', 'profile_field_'.$field->shortname, '', 'maxlength="100" style="width: 195px;" ');
         				$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
         				
         				$mform->addElement('html', '</div>');
@@ -325,14 +325,21 @@ class user_partneruser_edit_form extends moodleform {
         			
         			if($field->shortname == 'dataur'){
         				$mform->addElement('text', 'profile_field_'.
-        						$field->shortname, get_string('formuserdateofbirth', 'block_int_partneruser'), 'maxlength="100" size="34" class="calendar" ');
+        						$field->shortname, get_string('formuserdateofbirth', 'block_int_partneruser'), 'maxlength="100" style="width: 195px;" class="calendar" ');
         				$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
         				continue;
         			}
         			
         			if($field->shortname == 'miejsceur'){
         				$mform->addElement('text', 'profile_field_'.
-        						$field->shortname, get_string('formuserplaceofbirth', 'block_int_partneruser'), 'maxlength="100" size="34" ');
+        						$field->shortname, get_string('formuserplaceofbirth', 'block_int_partneruser'), 'maxlength="100" style="width: 195px;" ');
+        				$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
+        				continue;
+        			}
+        			
+        			if($field->shortname == 'pkk'){
+        				$mform->addElement('text', 'profile_field_'.
+        						$field->shortname, get_string('formuserpkk', 'block_int_partneruser'), 'class="pkk" maxlength="100" style="width: 195px;" ');
         				$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
         				continue;
         			}
@@ -349,37 +356,42 @@ class user_partneruser_edit_form extends moodleform {
 	        	
         		foreach ($fields as $field) {					
 
-					if($field->shortname == 'miasto'){
-						$mform->addElement('text', 'profile_field_'.$field->shortname, 
-								get_string('formuserpostcode', 'block_int_partneruser'), 'maxlength="100" size="34" ');
-						$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
+					if($field->shortname == 'miasto'){						
+						$objs = array();
+						$objs[] =& $mform->createElement('text', 'profile_field_kod', '', 'class="postcode" maxlength="6" style="width: 45px;" ');
+						$objs[] =& $mform->createElement('text', 'profile_field_miasto', '', 'maxlength="100" style="width: 135px;" ');
+						
+						$mform->setType('profile_field_kod', PARAM_TEXT);
+						$mform->setType('profile_field_miasto', PARAM_TEXT);
+						
+						$mform->addElement('group', 'citygrp', get_string('formuserpostcode', 'block_int_partneruser'), $objs, '', false);						
 						continue;
 					}
 					
 					if($field->shortname == 'ulica'){
 						$mform->addElement('text', 'profile_field_'.$field->shortname, 
-								get_string('formuserstreet', 'block_int_partneruser'), 'maxlength="100" size="34" ');
+								get_string('formuserstreet', 'block_int_partneruser'), 'class="street" maxlength="100" style="width: 195px;" ');
 						$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
 						continue;
 					}
 					
 					if($field->shortname == 'nrdomu'){
 						$mform->addElement('text', 'profile_field_'.$field->shortname, 
-								get_string('formuserno1', 'block_int_partneruser'), 'maxlength="100" size="34" ');
+								get_string('formuserno1', 'block_int_partneruser'), 'maxlength="100" style="width: 195px;" ');
 						$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
 						continue;
 					}
 					
 					if($field->shortname == 'nrlokalu'){
 						$mform->addElement('text', 'profile_field_'.$field->shortname, 
-								get_string('formuserno2', 'block_int_partneruser'), 'maxlength="100" size="34" ');
+								get_string('formuserno2', 'block_int_partneruser'), 'maxlength="100" style="width: 195px;" ');
 						$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
 						continue;
 					}
 					
 					if($field->shortname == 'telefon'){
 						$mform->addElement('text', 'profile_field_'.$field->shortname, 
-								get_string('formuserphone', 'block_int_partneruser'), 'maxlength="100" size="34" ');
+								get_string('formuserphone', 'block_int_partneruser'), 'maxlength="100" style="width: 195px;" ');
 						$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
 						continue;
 					}					
@@ -399,7 +411,7 @@ class user_partneruser_edit_form extends moodleform {
         		if(isset($fields['nrprawajazdy'])){
         			$field = $fields['nrprawajazdy'];
         			$mform->addElement('text', 'profile_field_'.
-        					$field->shortname, get_string('formusernumberdriver', 'block_int_partneruser'), 'maxlength="100" size="43" ');
+        					$field->shortname, get_string('formusernumberdriver', 'block_int_partneruser'), 'maxlength="100" style="width: 236px;" ');
         			$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT);
         		}
         		
@@ -434,7 +446,8 @@ class user_partneruser_edit_form extends moodleform {
         			$mform->addElement('html', '<div style="margin-top: 5px;">');
         			
         			$field = $fields['nrswiadectwa'];
-        			$mform->addElement('text', 'profile_field_'.$field->shortname, get_string('formusernumbercert', 'block_int_partneruser'), 'maxlength="100" size="30" ');
+        			$mform->addElement('text', 'profile_field_'.$field->shortname, get_string('formusernumbercert', 'block_int_partneruser'),
+        					 'maxlength="100" style="width: 166px;" ');
         			$mform->setType('profile_field_'.$field->shortname, PARAM_TEXT); 
 
         			$mform->addElement('html', '<div class="nrswiadectwano" >');

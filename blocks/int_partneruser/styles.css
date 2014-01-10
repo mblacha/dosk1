@@ -232,28 +232,20 @@ span#id_error_lastname {
 	margin: 0px;
 }
 
+#page-blocks-int_partneruser-user .mform #fitem_id_profile_field_pesel {
+	float: left;
+	width: 49%;
+	margin: 0;
+	pading: 0;
+}
+
+#page-blocks-int_partneruser-user .mform #fitem_id_profile_field_pesel input{
+	margin-left: 10px;
+	margin-bottom: 1px;
+}
+
 #page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel .fitemtitle{
 	display:none; 
-}
-
-
-#page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel{
-	display:inline; 
-	margin: 0;	
-}
-
-#page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel .felement{
-	display:inline; 
-	margin: 0;	
-}
-
-#page-blocks-int_partneruser-user .mform .person #fitem_id_profile_field_pesel .felement input{
-	margin-left': 7;	
-}
-
-#page-blocks-int_partneruser-user .mform .person .peselno{
-	font-size:0.9em;
-	margin-top: 5px;
 }
 
 
@@ -444,5 +436,8 @@ span#id_error_lastname {
 	width: 215px;
 }
 
-
-
+#page-blocks-int_partneruser-user .mform #fgroup_id_citygrp fieldset {	
+	width: 49%;
+	margin: 0;
+	padding: 0;	
+}

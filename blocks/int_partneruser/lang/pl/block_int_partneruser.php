@@ -42,9 +42,10 @@ $string['formuserpesel'] = 'PESEL';
 $string['formuserpeselno'] = 'brak PESELU';
 $string['formuserdateofbirth'] = 'DATA URODZENIA';
 $string['formuserplaceofbirth'] = 'MIEJSCE URODZENIA';
+$string['formuserpkk'] = 'PKK';
 
 $string['formusertitleaddress'] = 'DANE ADRESOWE';
-$string['formuserpostcode'] = 'KOD POCZTOWY / MIEJSCOWOŚĆ';
+$string['formuserpostcode'] = 'KOD POCZTOWY MIEJSCOWOŚĆ';
 $string['formuserstreet'] = 'ULICA';
 $string['formuserno1'] = 'NUMER DOMU';
 $string['formuserno2'] = 'NUMER MIESZKANIA';
