@@ -28,6 +28,8 @@ class user_editadvanced_form extends moodleform {
                 $userid = $this->_customdata['userid'];
             }
         }
+        
+        $filemanageroptions = array('maxbytes'=> $CFG->maxbytes, 'subdirs'=> 0, 'maxfiles'=> 1, 'accepted_types' => 'web_image');
 
         //Accessibility: "Required" is bad legend text.
         $strgeneral  = get_string('general');

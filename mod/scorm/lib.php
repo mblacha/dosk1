@@ -866,7 +866,7 @@ function scorm_get_file_areas($course, $cm, $context) {
  * @return file_info instance or null if not found
  */
 function scorm_get_file_info($browser, $areas, $course, $cm, $context, $filearea, $itemid, $filepath, $filename) {
-    global $CFG;
+    global $CFG;    
 
     if (!has_capability('moodle/course:managefiles', $context)) {
         return null;
@@ -929,46 +929,98 @@ function scorm_get_file_info($browser, $areas, $course, $cm, $context, $filearea
  * @return bool false if file not found, does not return if found - just send the file
  */
 function scorm_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options=array()) {
-    global $CFG;
+	global $CFG, $DB, $USER;
 
-    if ($context->contextlevel != CONTEXT_MODULE) {
-        return false;
-    }
+	if ($context->contextlevel != CONTEXT_MODULE) {
+		return false;
+	}
+	scorm_debug_log_write('scorm12', implode('/', $args), 1);
 
-    require_login($course, true, $cm);
+	require_login($course, true, $cm);
 
-    $lifetime = isset($CFG->filelifetime) ? $CFG->filelifetime : 86400;
+	$lifetime = isset($CFG->filelifetime) ? $CFG->filelifetime : 86400;
 
-    if ($filearea === 'content') {
-        $revision = (int)array_shift($args); // prevents caching problems - ignored here
-        $relativepath = implode('/', $args);
-        $fullpath = "/$context->id/mod_scorm/content/0/$relativepath";
-        // TODO: add any other access restrictions here if needed!
+	if ($filearea === 'content') {
+		$revision = (int)array_shift($args); // prevents caching problems - ignored here		
+		$relativepath = implode('/', $args);
+		$fullpath = "/$context->id/mod_scorm/content/0/$relativepath";
+		// TODO: add any other access restrictions here if needed!
+		
+		$slide = array_pop($args);
+		$slidetime = (int)$slide;		
+		if(is_int($slidetime) && ($slidetime>0)){
+			$relativepath = implode('/', $args);	
+			$fullpath = "/$context->id/mod_scorm/content/0/$relativepath";
+		} else {			
+			$value = substr($slide, 10);
+			scorm_debug_log_write('scorm12', $value, 1);
+			
+			if(($value == 'mp3') || ($value == 'mp4')){
+				send_header_404();
+				die;
+			}		
+		}
+	} else if ($filearea === 'package') {
+		if (!has_capability('moodle/course:manageactivities', $context)) {
+			return false;
+		}
+		$relativepath = implode('/', $args);
+		$fullpath = "/$context->id/mod_scorm/package/0/$relativepath";
+		$lifetime = 0; // no caching here
 
-    } else if ($filearea === 'package') {
-        if (!has_capability('moodle/course:manageactivities', $context)) {
-            return false;
-        }
-        $relativepath = implode('/', $args);
-        $fullpath = "/$context->id/mod_scorm/package/0/$relativepath";
-        $lifetime = 0; // no caching here
+	} else {
+		return false;
+	}
 
-    } else {
-        return false;
-    }
+	$fs = get_file_storage();
+	if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
+		if ($filearea === 'content') { //return file not found straight away to improve performance.
+			send_header_404();
+			die;
+		}
+		return false;
+	}
+	
+	/* mblacha*/
+	if ($filearea === 'content') {
+		
+		if(is_int($slidetime) && ($slidetime>0)){
+				
+			$slide = array_pop($args);
+			$value = (int)substr($slide, 6, 3).';'.$slidetime;
+			$newvalue = (int)substr($slide, 6, 3);		
+			
+			try {
+				$transaction = $DB->start_delegated_transaction();				
+				
+				if($track = $DB->get_record_sql('SELECT * FROM {scorm_scoes_track} WHERE userid = :user AND scormid = :scorm
+					AND element = :element AND value = :value',
+						array('user'=>$USER->id, 'element'=>'cmi.core.lesson_location', 'scorm'=>$cm->instance, 'value'=>$value))){					
+					$track->value = $newvalue;
+					if($DB->update_record('scorm_scoes_track', $track)){					
+						scorm_debug_log_write('scorm12', 'koniec', 1);
+					} else {
+						send_header_404();
+						die;
+					}
+				} else {
+					send_header_404();
+					die;
+				}
+				
+				
+				// Assuming the both inserts work, we get to the following line.
+				$transaction->allow_commit();
+			} catch(Exception $e) {
+				$transaction->rollback($e);
+			}			
+		}
+	}	
 
-    $fs = get_file_storage();
-    if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
-        if ($filearea === 'content') { //return file not found straight away to improve performance.
-            send_header_404();
-            die;
-        }
-        return false;
-    }
-
-    // finally send the file
-    send_stored_file($file, $lifetime, 0, false, $options);
+	// finally send the file
+	send_stored_file($file, $lifetime, 0, false, $options);
 }
+
 
 /**
  * @uses FEATURE_GROUPS
@@ -1023,7 +1075,7 @@ function scorm_debug_log_filename($type, $scoid) {
  */
 function scorm_debug_log_write($type, $text, $scoid) {
 
-    $debugenablelog = get_config('scorm', 'allowapidebug');
+    $debugenablelog = true;//get_config('scorm', 'allowapidebug');
     if (!$debugenablelog || empty($text)) {
         return;
     }
@@ -1041,7 +1093,7 @@ function scorm_debug_log_write($type, $text, $scoid) {
  * @return boolean True if the file is successfully deleted, false otherwise
  */
 function scorm_debug_log_remove($type, $scoid) {
-
+	return false;
     $debugenablelog = get_config('scorm', 'allowapidebug');
     $logfile = scorm_debug_log_filename($type, $scoid);
     if (!$debugenablelog || !file_exists($logfile)) {
@@ -1269,6 +1321,8 @@ function scorm_dndupload_register() {
  * @return int instance id of the newly created mod
  */
 function scorm_dndupload_handle($uploadinfo) {
+	
+	scorm_debug_log_write('scorm12', 'scorm_dndupload_handle', 1);
 
     $context = context_module::instance($uploadinfo->coursemodule);
     file_save_draft_area_files($uploadinfo->draftitemid, $context->id, 'mod_scorm', 'package', 0);

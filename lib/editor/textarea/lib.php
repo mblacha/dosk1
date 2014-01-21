@@ -31,6 +31,7 @@ class textarea_texteditor extends texteditor {
         return true;
     }
 
+    /*
     public function get_supported_formats() {
         return array(FORMAT_HTML     => FORMAT_HTML,
                      FORMAT_MOODLE   => FORMAT_MOODLE,
@@ -41,6 +42,15 @@ class textarea_texteditor extends texteditor {
 
     public function get_preferred_format() {
         return FORMAT_MOODLE;
+    }
+    */
+    
+    public function get_supported_formats() {
+    	return array(FORMAT_PLAIN    => FORMAT_PLAIN);
+    }
+    
+    public function get_preferred_format() {
+    	return FORMAT_PLAIN;
     }
 
     public function supports_repositories() {

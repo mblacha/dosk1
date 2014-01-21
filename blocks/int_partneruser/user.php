@@ -260,7 +260,7 @@ $PAGE->verify_https_required();
 $userfullname = fullname($user, true);
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading($userfullname);
+echo $OUTPUT->heading($userfullname . ' '. $user->username);
 echo html_writer::start_tag('div', array('id' => 'page-blocks-int_partneruser-user'));
 $userform->display();
 echo html_writer::end_tag('div');

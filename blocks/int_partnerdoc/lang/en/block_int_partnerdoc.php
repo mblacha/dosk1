@@ -24,3 +24,56 @@ $string['person'] = 'Person';
 $string['doc'] = 'Document';
 $string['course'] = 'Course';
 
+$string['oskprofil'] = '';
+
+$string['formosktitlemain'] = '';
+$string['formosktitlecontact'] = '';
+$string['formosktitlelogo'] = '';
+$string['formosktitlebook'] = '';
+
+$string['formosknumber'] = '';
+$string['formosknumberpowiat'] = '';
+$string['formoskmanager'] = '';
+$string['formoskfirm'] = '';
+$string['formoskcity'] = '';
+$string['formoskstreet'] = '';
+$string['formoskpostcode'] = '';
+$string['formoskno1'] = '';
+$string['formoskno2'] = '';
+$string['formoskprovince'] = '';
+$string['formosknip'] = '';
+$string['formoskbill'] = '';
+$string['formoskaddress'] = '';
+$string['formoskemail'] = '';
+$string['formoskurl'] = '';
+$string['formoskphone'] = '';
+$string['formoskmobilphone'] = '';
+$string['formoskfirstname'] = '';
+$string['formosklastname'] = '';
+$string['formoskusername'] = '';
+$string['formoskpassword'] = '';
+
+$string['formoskprovince01'] = '';
+$string['formoskprovince02'] = '';
+$string['formoskprovince03'] = '';
+$string['formoskprovince04'] = '';
+$string['formoskprovince05'] = '';
+$string['formoskprovince06'] = '';
+$string['formoskprovince07'] = '';
+$string['formoskprovince08'] = '';
+$string['formoskprovince09'] = '';
+$string['formoskprovince10'] = '';
+$string['formoskprovince11'] = '';
+$string['formoskprovince12'] = '';
+$string['formoskprovince13'] = '';
+$string['formoskprovince14'] = '';
+$string['formoskprovince15'] = '';
+$string['formoskprovince16'] = '';
+
+$string['formoskbookcode'] = '';
+$string['formoskbookname'] = '';
+$string['formoskbookaddress'] = '';
+$string['formoskbookpostcode'] = '';
+$string['formoskbookcity'] = '';
+$string['formoskbooknip'] = '';
+

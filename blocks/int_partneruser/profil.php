@@ -86,6 +86,10 @@ echo html_writer::tag('dd', $user->lastname);
 
 echo html_writer::tag('dt', get_string('pesel', 'block_int_partneruser'));
 echo html_writer::tag('dd', $user->profile_field_pesel);
+
+echo html_writer::tag('dt', get_string('code', 'block_int_partneruser'));
+echo html_writer::tag('dd', $user->username);
+
 echo html_writer::end_tag('dl');
 
 $editurl = new moodle_url('/blocks/int_partneruser/user.php', array('id'=>$user->id));

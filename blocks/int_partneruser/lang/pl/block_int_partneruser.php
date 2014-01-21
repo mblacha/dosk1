@@ -21,6 +21,7 @@ $string['pesel'] = 'Pesel';
 $string['lp'] = 'Lp.';
 $string['details'] = 'Szczegóły';
 $string['person'] = 'Osoba szkolona';
+$string['code'] = 'Kod';
 
 $string['users'] = 'Lista osób szkolonych';
 
