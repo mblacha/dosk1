@@ -2504,7 +2504,6 @@ function update_capabilities($component = 'moodle') {
     }
 
     $cachedcaps = get_cached_capabilities($component);
-   
     if ($cachedcaps) {
         foreach ($cachedcaps as $cachedcap) {
             array_push($storedcaps, $cachedcap->name);
@@ -2541,7 +2540,7 @@ function update_capabilities($component = 'moodle') {
 
     // Are there new capabilities in the file definition?
     $newcaps = array();
-    
+
     foreach ($filecaps as $filecap => $def) {
         if (!$storedcaps ||
                 ($storedcaps && in_array($filecap, $storedcaps) === false)) {
@@ -2551,7 +2550,6 @@ function update_capabilities($component = 'moodle') {
             $newcaps[$filecap] = $def;
         }
     }
-    
     // Add new capabilities to the stored definition.
     $existingcaps = $DB->get_records_menu('capabilities', array(), 'id', 'id, name');
     foreach ($newcaps as $capname => $capdef) {

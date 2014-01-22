@@ -26,7 +26,6 @@
 
 require('../config.php');
 require_once('change_password_form.php');
-require_once($CFG->libdir.'/authlib.php');
 
 $id     = optional_param('id', SITEID, PARAM_INT); // current course
 $return = optional_param('return', 0, PARAM_BOOL); // redirect after password change
@@ -41,7 +40,7 @@ $PAGE->set_context(context_system::instance());
 if ($return) {
     // this redirect prevents security warning because https can not POST to http pages
     if (empty($SESSION->wantsurl)
-            or stripos(str_replace('https://', 'http://', $SESSION->wantsurl), str_replace('https://', 'http://', $CFG->wwwroot.'/login/change_password.php')) === 0) {
+            or stripos(str_replace('https://', 'http://', $SESSION->wantsurl), str_replace('https://', 'http://', $CFG->wwwroot.'/login/change_password.php') === 0)) {
         $returnto = "$CFG->wwwroot/user/view.php?id=$USER->id&course=$id";
     } else {
         $returnto = $SESSION->wantsurl;
@@ -110,9 +109,6 @@ if ($mform->is_cancelled()) {
     if (!$userauth->user_update_password($USER, $data->newpassword1)) {
         print_error('errorpasswordupdate', 'auth');
     }
-
-    // Reset login lockout - we want to prevent any accidental confusion here.
-    login_unlock_account($USER);
 
     // register success changing password
     unset_user_preference('auth_forcepasswordchange', $USER);

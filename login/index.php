@@ -26,12 +26,6 @@
 
 require('../config.php');
 
-// Try to prevent searching for sites that allow sign-up.
-if (!isset($CFG->additionalhtmlhead)) {
-    $CFG->additionalhtmlhead = '';
-}
-$CFG->additionalhtmlhead .= '<meta name="robots" content="noindex" />';
-
 redirect_if_major_upgrade_required();
 
 $testsession = optional_param('testsession', 0, PARAM_INT); // test session works properly
@@ -137,12 +131,6 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
     } else {
         if (empty($errormsg)) {
             $user = authenticate_user_login($frm->username, $frm->password);
-            if($user->auth == 'int_keygen'){
-            	unset($user);
-				$user = false;
-            	$errormsg = get_string('errorlogintype', 'auth_int_keygen');
-            	$errorcode = 10;
-            }
         }
     }
 
@@ -159,6 +147,8 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
         echo $OUTPUT->footer();
         die;
     }
+
+    update_login_count();
 
     if ($user) {
 
@@ -255,6 +245,8 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
             }
         }
 
+        reset_login_count();
+
         // test the session actually works by redirecting to self
         $SESSION->wantsurl = $urltogo;
         redirect(new moodle_url(get_login_url(), array('testsession'=>$USER->id)));
@@ -280,8 +272,7 @@ if (empty($SESSION->wantsurl)) {
                           $_SERVER["HTTP_REFERER"] != $CFG->wwwroot &&
                           $_SERVER["HTTP_REFERER"] != $CFG->wwwroot.'/' &&
                           $_SERVER["HTTP_REFERER"] != $CFG->httpswwwroot.'/login/' &&
-                          strpos($_SERVER["HTTP_REFERER"], $CFG->httpswwwroot.'/login/?') !== 0 &&
-                          strpos($_SERVER["HTTP_REFERER"], $CFG->httpswwwroot.'/login/index.php') !== 0) // There might be some extra params such as ?lang=.
+                          $_SERVER["HTTP_REFERER"] != $CFG->httpswwwroot.'/login/index.php')
         ? $_SERVER["HTTP_REFERER"] : NULL;
 }
 

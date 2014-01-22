@@ -200,6 +200,9 @@ span#id_error_lastname {
 	display:inline-block;	
 }
 
+#page-blocks-int_partneruser-user .mform .person {
+	border: 0px solid red;
+}
 
 #page-blocks-int_partneruser-user .mform .title {	
 	border-bottom: 2px solid #cecece;
