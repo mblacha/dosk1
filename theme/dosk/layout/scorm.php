@@ -1,4 +1,5 @@
 <?php
+$bodyclasses = array();
 echo $OUTPUT->doctype() ?>
 <html <?php echo $OUTPUT->htmlattributes() ?>>
 <head>

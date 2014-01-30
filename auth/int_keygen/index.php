@@ -185,7 +185,11 @@ if ($frm and isset($frm->username)) {                             // Login WITH 
 
     /// Prepare redirection
     
-        $SESSION->wantsurl = $CFG->wwwroot . '/auth/int_keygen/jump.php';
+        if ($USER->policyagreed){
+        	$SESSION->wantsurl = $CFG->wwwroot . '/auth/int_keygen/jump.php';
+        } else {
+        	$SESSION->wantsurl = $CFG->wwwroot . '/user/policy.php';
+        }
 
         if ($authplugin->user_not_fully_set_up($USER)) {
             $urltogo = $CFG->wwwroot.'/user/edit.php';

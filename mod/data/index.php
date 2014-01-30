@@ -41,7 +41,6 @@ $context = context_course::instance($course->id);
 
 add_to_log($course->id, "data", "view all", "index.php?id=$course->id", "");
 
-$strsectionname  = get_string('sectionname', 'format_'.$course->format);
 $strname = get_string('name');
 $strdata = get_string('modulename','data');
 $strdataplural  = get_string('modulenameplural','data');
@@ -50,6 +49,7 @@ $PAGE->navbar->add($strdata, new moodle_url('/mod/data/index.php', array('id'=>$
 $PAGE->set_title($strdata);
 $PAGE->set_heading($course->fullname);
 echo $OUTPUT->header();
+echo $OUTPUT->heading($strdataplural, 2);
 
 if (! $datas = get_all_instances_in_course("data", $course)) {
     notice(get_string('thereareno', 'moodle',$strdataplural) , "$CFG->wwwroot/course/view.php?id=$course->id");
@@ -66,6 +66,7 @@ $strnumnotapproved = get_string('numnotapproved', 'data');
 $table = new html_table();
 
 if ($usesections) {
+    $strsectionname = get_string('sectionname', 'format_'.$course->format);
     $table->head  = array ($strsectionname, $strname, $strdescription, $strentries, $strnumnotapproved);
     $table->align = array ('center', 'center', 'center', 'center', 'center');
 } else {

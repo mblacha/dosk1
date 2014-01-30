@@ -137,7 +137,7 @@ abstract class testing_util {
             return false;
         }
 
-        $hash = self::get_version_hash();
+        $hash = core_component::get_all_versions_hash();
         $oldhash = file_get_contents($datarootpath . '/versionshash.txt');
 
         if ($hash !== $oldhash) {
@@ -195,7 +195,7 @@ abstract class testing_util {
         global $CFG;
 
         $framework = self::get_framework();
-        $hash = self::get_version_hash();
+        $hash = core_component::get_all_versions_hash();
 
         // add test db flag
         set_config($framework . 'test', $hash);
@@ -598,13 +598,87 @@ abstract class testing_util {
         closedir($handle);
         make_temp_directory('');
         make_cache_directory('');
-        make_cache_directory('htmlpurifier');
+        make_localcache_directory('');
         // Reset the cache API so that it recreates it's required directories as well.
         cache_factory::reset();
         // Purge all data from the caches. This is required for consistency.
         // Any file caches that happened to be within the data root will have already been clearer (because we just deleted cache)
         // and now we will purge any other caches as well.
         cache_helper::purge_all();
+    }
+
+    /**
+     * Gets a text-based site version description.
+     *
+     * @return string The site info
+     */
+    public static function get_site_info() {
+        global $CFG;
+
+        $output = '';
+
+        // All developers have to understand English, do not localise!
+
+        $release = null;
+        require("$CFG->dirroot/version.php");
+
+        $output .= "Moodle $release, $CFG->dbtype";
+        if ($hash = self::get_git_hash()) {
+            $output .= ", $hash";
+        }
+        $output .= "\n";
+
+        return $output;
+    }
+
+    /**
+     * Try to get current git hash of the Moodle in $CFG->dirroot.
+     * @return string null if unknown, sha1 hash if known
+     */
+    public static function get_git_hash() {
+        global $CFG;
+
+        // This is a bit naive, but it should mostly work for all platforms.
+
+        if (!file_exists("$CFG->dirroot/.git/HEAD")) {
+            return null;
+        }
+
+        $headcontent = file_get_contents("$CFG->dirroot/.git/HEAD");
+        if ($headcontent === false) {
+            return null;
+        }
+
+        $headcontent = trim($headcontent);
+
+        // If it is pointing to a hash we return it directly.
+        if (strlen($headcontent) === 40) {
+            return $headcontent;
+        }
+
+        if (strpos($headcontent, 'ref: ') !== 0) {
+            return null;
+        }
+
+        $ref = substr($headcontent, 5);
+
+        if (!file_exists("$CFG->dirroot/.git/$ref")) {
+            return null;
+        }
+
+        $hash = file_get_contents("$CFG->dirroot/.git/$ref");
+
+        if ($hash === false) {
+            return null;
+        }
+
+        $hash = trim($hash);
+
+        if (strlen($hash) != 40) {
+            return null;
+        }
+
+        return $hash;
     }
 
     /**
@@ -669,54 +743,4 @@ abstract class testing_util {
             }
         }
     }
-
-    /**
-     * Calculate unique version hash for all plugins and core.
-     * @static
-     * @return string sha1 hash
-     */
-    public static function get_version_hash() {
-        global $CFG;
-
-        if (self::$versionhash) {
-            return self::$versionhash;
-        }
-
-        $versions = array();
-
-        // main version first
-        $version = null;
-        include($CFG->dirroot.'/version.php');
-        $versions['core'] = $version;
-
-        // modules
-        $mods = get_plugin_list('mod');
-        ksort($mods);
-        foreach ($mods as $mod => $fullmod) {
-            $module = new stdClass();
-            $module->version = null;
-            include($fullmod.'/version.php');
-            $versions[$mod] = $module->version;
-        }
-
-        // now the rest of plugins
-        $plugintypes = get_plugin_types();
-        unset($plugintypes['mod']);
-        ksort($plugintypes);
-        foreach ($plugintypes as $type => $unused) {
-            $plugs = get_plugin_list($type);
-            ksort($plugs);
-            foreach ($plugs as $plug => $fullplug) {
-                $plugin = new stdClass();
-                $plugin->version = null;
-                @include($fullplug.'/version.php');
-                $versions[$plug] = $plugin->version;
-            }
-        }
-
-        self::$versionhash = sha1(serialize($versions));
-
-        return self::$versionhash;
-    }
-
 }

@@ -559,8 +559,7 @@ class question_bank_creator_name_column extends question_bank_column_base {
     protected function display_content($question, $rowclasses) {
         if (!empty($question->creatorfirstname) && !empty($question->creatorlastname)) {
             $u = new stdClass();
-            $u->firstname = $question->creatorfirstname;
-            $u->lastname = $question->creatorlastname;
+            $u = username_load_fields_from_object($u, $question, 'creator');
             echo fullname($u);
         }
     }
@@ -570,7 +569,12 @@ class question_bank_creator_name_column extends question_bank_column_base {
     }
 
     public function get_required_fields() {
-        return array('uc.firstname AS creatorfirstname', 'uc.lastname AS creatorlastname');
+        $allnames = get_all_user_name_fields();
+        $requiredfields = array();
+        foreach ($allnames as $allname) {
+            $requiredfields[] = 'uc.' . $allname . ' AS creator' . $allname;
+        }
+        return $requiredfields;
     }
 
     public function is_sortable() {
@@ -600,8 +604,7 @@ class question_bank_modifier_name_column extends question_bank_column_base {
     protected function display_content($question, $rowclasses) {
         if (!empty($question->modifierfirstname) && !empty($question->modifierlastname)) {
             $u = new stdClass();
-            $u->firstname = $question->modifierfirstname;
-            $u->lastname = $question->modifierlastname;
+            $u = username_load_fields_from_object($u, $question, 'modifier');
             echo fullname($u);
         }
     }
@@ -611,7 +614,12 @@ class question_bank_modifier_name_column extends question_bank_column_base {
     }
 
     public function get_required_fields() {
-        return array('um.firstname AS modifierfirstname', 'um.lastname AS modifierlastname');
+        $allnames = get_all_user_name_fields();
+        $requiredfields = array();
+        foreach ($allnames as $allname) {
+            $requiredfields[] = 'um.' . $allname . ' AS modifier' . $allname;
+        }
+        return $requiredfields;
     }
 
     public function is_sortable() {
@@ -832,8 +840,9 @@ class question_bank_question_text_row extends question_bank_row_base {
     }
 
     protected function display_content($question, $rowclasses) {
-        $text = question_rewrite_questiontext_preview_urls($question->questiontext,
-                $question->contextid, 'question', $question->id);
+        $text = question_rewrite_question_preview_urls($question->questiontext, $question->id,
+                $question->contextid, 'question', 'questiontext', $question->id,
+                $question->contextid, 'core_question');
         $text = format_text($text, $question->questiontextformat,
                 $this->formatoptions);
         if ($text == '') {
@@ -932,7 +941,7 @@ class question_bank_view {
         $columns = array('checkbox', 'qtype', 'questionname', 'editaction',
                 'previewaction', 'moveaction', 'deleteaction', 'creatorname',
                 'modifiername');
-        if (optional_param('qbshowtext', false, PARAM_BOOL)) {
+        if (question_get_display_preference('qbshowtext', 0, PARAM_BOOL, new moodle_url(''))) {
             $columns[] = 'questiontext';
         }
         return $columns;
@@ -1387,7 +1396,6 @@ class question_bank_view {
         if ($totalnumber == 0) {
             return;
         }
-
         $questions = $this->load_page_questions($page, $perpage);
 
         echo '<div class="categorypagingbarcontainer">';
@@ -1819,6 +1827,7 @@ function print_choose_qtype_to_add_form($hiddenparams, array $allowedqtypes = nu
     echo "</div>\n";
     echo '<div class="qtypes">' . "\n";
     echo '<div class="instruction">' . get_string('selectaqtypefordescription', 'question') . "</div>\n";
+    echo '<div class="alloptions">' . "\n";
     echo '<div class="realqtypes">' . "\n";
     $fakeqtypes = array();
     foreach (question_bank::get_creatable_qtypes() as $qtypename => $qtype) {
@@ -1836,6 +1845,7 @@ function print_choose_qtype_to_add_form($hiddenparams, array $allowedqtypes = nu
     foreach ($fakeqtypes as $qtype) {
         print_qtype_to_add_option($qtype);
     }
+    echo "</div>\n";
     echo "</div>\n";
     echo "</div>\n";
     echo '<div class="submitbuttons">' . "\n";

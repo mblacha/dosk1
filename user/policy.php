@@ -42,11 +42,6 @@ if (isguestuser()) {
     $sitepolicy = $CFG->sitepolicy;
 }
 
-//mblacha
-if(isset($USER->auth) and ($USER->auth == 'int_keygen')){
-	$SESSION->wantsurl = $CFG->wwwroot . '/auth/int_keygen/jump.php';
-}
-
 if (!empty($SESSION->wantsurl)) {
     $return = $SESSION->wantsurl;
 } else {
@@ -88,11 +83,9 @@ if ($mimetype == 'document/unknown') {
 // we can not use our popups here, because the url may be arbitrary, see MDL-9823
 $clicktoopen = '<a href="'.$sitepolicy.'" onclick="this.target=\'_blank\'">'.$strpolicyagreementclick.'</a>';
 
-/*mblacha
 echo '<div class="noticebox">';
 echo resourcelib_embed_general($sitepolicy, $strpolicyagreement, $clicktoopen, $mimetype);
 echo '</div>';
-*/
 
 $formcontinue = new single_button(new moodle_url('policy.php', array('agree'=>1)), get_string('yes'));
 $formcancel = new single_button(new moodle_url($CFG->wwwroot.'/login/logout.php', array('agree'=>0)), get_string('no'));

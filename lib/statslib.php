@@ -259,6 +259,7 @@ function stats_cron_daily($maxdays=1) {
             $failed = true;
             break;
         }
+        $DB->update_temp_table_stats();
 
         stats_progress('1');
 
@@ -385,6 +386,10 @@ function stats_cron_daily($maxdays=1) {
             $failed = true;
             break;
         }
+        // The steps up until this point, all add to {temp_stats_daily} and don't use new tables.
+        // There is no point updating statistics as they won't be used until the DELETE below.
+        $DB->update_temp_table_stats();
+
         stats_progress('7');
 
         // Default frontpage role enrolments are all site users (not deleted)
@@ -581,6 +586,7 @@ function stats_cron_daily($maxdays=1) {
             $failed = true;
             break;
         }
+        $DB->update_temp_table_stats();
         stats_progress('15');
 
         // How many view actions for guests or not-logged-in on frontpage
@@ -1589,47 +1595,66 @@ function stats_temp_table_create() {
 
     stats_temp_table_drop();
 
-    $xmlfile  = $CFG->dirroot . '/lib/db/install.xml';
-    $tables   = array();
+    $tables = array();
 
-    // Allows for the additional xml files to be used (if necessary)
-    $files    = array(
-        $xmlfile  => array(
-            'stats_daily'           => array('temp_stats_daily'),
-            'stats_user_daily'      => array('temp_stats_user_daily'),
-            'temp_enroled_template' => array('temp_enroled'),
-            'temp_log_template'     => array('temp_log1', 'temp_log2'),
-        ),
-    );
+    /// Define tables user to be created
+    $table = new xmldb_table('temp_stats_daily');
+    $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    $table->add_field('courseid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('timeend', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('roleid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('stattype', XMLDB_TYPE_CHAR, 20, null, XMLDB_NOTNULL, null, 'activity');
+    $table->add_field('stat1', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('stat2', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+    $table->add_index('courseid', XMLDB_INDEX_NOTUNIQUE, array('courseid'));
+    $table->add_index('timeend', XMLDB_INDEX_NOTUNIQUE, array('timeend'));
+    $table->add_index('roleid', XMLDB_INDEX_NOTUNIQUE, array('roleid'));
+    $tables['temp_stats_daily'] = $table;
 
-    foreach ($files as $file => $contents) {
+    $table = new xmldb_table('temp_stats_user_daily');
+    $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    $table->add_field('courseid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('userid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('roleid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('timeend', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('statsreads', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('statswrites', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('stattype', XMLDB_TYPE_CHAR, 30, null, XMLDB_NOTNULL, null, null);
+    $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+    $table->add_index('courseid', XMLDB_INDEX_NOTUNIQUE, array('courseid'));
+    $table->add_index('userid', XMLDB_INDEX_NOTUNIQUE, array('userid'));
+    $table->add_index('timeend', XMLDB_INDEX_NOTUNIQUE, array('timeend'));
+    $table->add_index('roleid', XMLDB_INDEX_NOTUNIQUE, array('roleid'));
+    $tables['temp_stats_user_daily'] = $table;
 
-        $xmldb_file = new xmldb_file($file);
-        if (!$xmldb_file->fileExists()) {
-            throw new ddl_exception('ddlxmlfileerror', null, 'File does not exist');
-        }
-        $loaded = $xmldb_file->loadXMLStructure();
-        if (!$loaded || !$xmldb_file->isLoaded()) {
-            throw new ddl_exception('ddlxmlfileerror', null, 'not loaded??');
-        }
-        $xmldb_structure = $xmldb_file->getStructure();
+    $table = new xmldb_table('temp_enroled');
+    $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    $table->add_field('userid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('courseid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('roleid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, null);
+    $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+    $table->add_index('userid', XMLDB_INDEX_NOTUNIQUE, array('userid'));
+    $table->add_index('courseid', XMLDB_INDEX_NOTUNIQUE, array('courseid'));
+    $table->add_index('roleid', XMLDB_INDEX_NOTUNIQUE, array('roleid'));
+    $tables['temp_enroled'] = $table;
 
-        foreach ($contents as $template => $names) {
-            $table = $xmldb_structure->getTable($template);
 
-            if (is_null($table)) {
-                throw new ddl_exception('ddlunknowntable', null, 'The table '. $name .' is not defined in the file '. $xmlfile);
-            }
-            $table->setNext(null);
-            $table->setPrevious(null);
+    $table = new xmldb_table('temp_log1');
+    $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+    $table->add_field('userid', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('course', XMLDB_TYPE_INTEGER, 10, null, XMLDB_NOTNULL, null, '0');
+    $table->add_field('action', XMLDB_TYPE_CHAR, 40, null, XMLDB_NOTNULL, null, null);
+    $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
+    $table->add_index('action', XMLDB_INDEX_NOTUNIQUE, array('action'));
+    $table->add_index('course', XMLDB_INDEX_NOTUNIQUE, array('course'));
+    $table->add_index('user', XMLDB_INDEX_NOTUNIQUE, array('userid'));
+    $table->add_index('usercourseaction', XMLDB_INDEX_NOTUNIQUE, array('userid','course','action'));
+    $tables['temp_log1'] = $table;
 
-            foreach ($names as $name) {
-                $named = clone $table;
-                $named->setName($name);
-                $tables[$name] = $named;
-            }
-        }
-    }
+    /// temp_log2 is exactly the same as temp_log1.
+    $tables['temp_log2'] = clone $tables['temp_log1'];
+    $tables['temp_log2']->setName('temp_log2');
 
     try {
 
@@ -1716,6 +1741,9 @@ function stats_temp_table_fill($timestart, $timeend) {
             SELECT userid, course, action FROM {temp_log1}';
 
     $DB->execute($sql);
+
+    // We have just loaded all the temp tables, collect statistics for that.
+    $DB->update_temp_table_stats();
 
     return true;
 }

@@ -39,13 +39,7 @@ class block_int_partnerdoc extends block_base {
         if (!isloggedin() or isguestuser()) {
             return '';      // Never useful unless you are logged in as real users
         }
-        
-     /*	if (!has_capability('block/int_partnerdoc:addinstance', context_system::instance())) {
-            $this->title = '';
-            $header = '<div class="header"><img src="'.$CFG->wwwroot.'/blocks/int_partnerdoc/pix/header.png" alt="header"></div>';
-        } else {
-			$header = '';
-		}    */     
+    
 
         $this->content = new stdClass;
         $this->content->text = '';
@@ -53,9 +47,16 @@ class block_int_partnerdoc extends block_base {
 		
 		$this->content->text .= "<ul>\n";
         
+		//docs
         $this->content->text .= '<li>';
         $str = get_string('cardclasses', 'block_int_partnerdoc');
         $this->content->text .= '<a href="'.$CFG->wwwroot.'/blocks/int_partnerdoc/docs.php" title="'. $str .'">'.$str.'</a>';
+        $this->content->text .= "</li>\n";
+        
+        //osk
+        $this->content->text .= '<li>';
+        $str = get_string('oskprofil', 'block_int_partnerdoc');
+        $this->content->text .= '<a href="'.$CFG->wwwroot.'/blocks/int_partnerdoc/osk.php" title="'. $str .'">'.$str.'</a>';
         $this->content->text .= "</li>\n";
               
         $this->content->text .= '</ul><div class="clearer"><!-- --></div>';

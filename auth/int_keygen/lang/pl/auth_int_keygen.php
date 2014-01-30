@@ -22,6 +22,6 @@ $string['errorpassword2'] = 'Wpisane hasła nie są identyczne.';
 $string['errorlogintype'] = 'Zaloguj się jako kursant';
 $string['errornouser'] = 'Nie jesteś kursantem';
 $string['password2'] = 'Powtórz hasło';
-$string['invalidcode'] = 'Niewłaściwy kod lub hasło,<br>spróbuj ponownie';
+$string['invalidcode'] = 'Niewłaściwy kod lub hasło, spróbuj ponownie';
 
 

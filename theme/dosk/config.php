@@ -44,8 +44,7 @@ $THEME->sheets = array(
     'modules',
     'question',
     'css3',
-	 'dosk_style',
-	 'colorbox'      /** Sets up CSS 3 + browser specific styles **/
+	 'dosk_style'      /** Sets up CSS 3 + browser specific styles **/
 );
 $THEME->enable_dock = true;
 
@@ -139,6 +138,11 @@ $THEME->layouts = array(
         'regions' => array(),
         'options' => array('nofooter'=>true, 'nonavbar'=>true, 'nocustommenu'=>true, 'nocourseheaderfooter'=>true),
     ),
+	 'quiz' => array(
+        'file' => 'quiz.php',
+        'regions' => array(),
+        'options' => array('nofooter'=>true, 'nonavbar'=>true, 'nocustommenu'=>true, 'nocourseheaderfooter'=>true),
+    ),
     // Used during upgrade and install, and for the 'This site is undergoing maintenance' message.
     // This must not have any blocks, and it is good idea if it does not have links to
     // other places - for example there should not be a home link in the footer...
@@ -173,7 +177,5 @@ $THEME->layouts = array(
         'options' => array('nofooter'=>true, 'nonavbar'=>true, 'nocustommenu'=>true, 'nologinlinks'=>true, 'nocourseheaderfooter'=>true),
     ),
 );
-
-
 
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';

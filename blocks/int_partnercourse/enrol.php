@@ -20,11 +20,20 @@ require_once($CFG->dirroot.'/mnet/service/enrol/locallib.php');
 
 require_login();
 
-$blockid = required_param('blockid', PARAM_INT);// instance of block
 $usecache = optional_param('usecache', true, PARAM_BOOL); // use cached list of courses
 
 $course = $DB->get_record('course', array('id' => SITEID), '*', MUST_EXIST);
-$blockcontext = get_context_instance(CONTEXT_BLOCK, $blockid);
+
+if(class_exists('context_course')) {
+	$context  = context_course::instance($course->id);
+}
+else {
+	$context  = get_context_instance(CONTEXT_COURSE, $course->id);
+}
+
+if($block = $DB->get_record('block_instances', array('parentcontextid'=>$context->id, 'blockname'=>'int_partnercourse'))){
+	$blockcontext = get_context_instance(CONTEXT_BLOCK, $block->id);
+}
 
 require_capability('moodle/block:view', $blockcontext);
 
@@ -54,11 +63,11 @@ $PAGE->navbar->add(get_string('pluginname', 'block_int_partnercourse'));
 //$PAGE->navbar->add(get_string('users', 'block_int_partnercourse'), new moodle_url('/blocks/int_partnercourse/users.php', array('id'=>$blockid)));
 $PAGE->navbar->add($title);
 $PAGE->set_course($course);
-$PAGE->set_url('/blocks/int_partnercourse/users.php', array('id'=>$blockid));
+$PAGE->set_url('/blocks/int_partnercourse/users.php');
 $PAGE->set_pagelayout('course');
 $PAGE->requires->js('/blocks/int_partnercourse/module.js');
 
-$customdata = array('blockid'=>$blockid, 'usecache'=>$usecache);
+$customdata = array('usecache'=>$usecache);
 //create form
 $enrolform = new enrol_partnercourse_user_form(null, $customdata, 'post', '', array('id'=>'enrol_partnercourse', 'class'=>'enrol_partnercourse_user'));
 //$enrolform->set_data($user);
@@ -118,7 +127,7 @@ if ($enrolnew = $enrolform->get_data()) {
 		echo $OUTPUT->box($error, 'generalbox error');
 	}
 	
-	redirect(new moodle_url('/blocks/int_partnercourse/courses.php?blockid', array('blockid'=>$blockid)));
+	redirect(new moodle_url('/blocks/int_partnercourse/courses.php'));
 }
 
 

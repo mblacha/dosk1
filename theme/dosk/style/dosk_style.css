@@ -210,43 +210,20 @@ border-bottom-left-radius: 5px;
 
 #menu_dosk a{
 	background: transparent url([[pix:theme|menu-item]]) top no-repeat;
-	height: 49px;
-	width: 146px;
-	line-height: 36px;
-	font-size: 16px;
-	font-weight: normal;
+	height: 41px;
+	width: 125px;
+	line-height: 30px;
+	font-size: 12px;
+	font-weight: bold;
 	display: block;
 	float: left;
 	text-align: center;
-	color: #000;
-	font-family: signika;
 }
 
 #menu_dosk a:hover {
 	background: transparent url([[pix:theme|menu-item]]) bottom no-repeat;
 	color: white;
 	text-decoration: none;
-}
-
-#menu_dosk a.log_in {
-	background: transparent url([[pix:theme|zaloguj_btn]]) top no-repeat;
-	height: 49px;
-	width: 146px;
-	text-align: left;
-	text-indent: 36px;
-}
-
-#menu_dosk a.log_out {
-	background: transparent url([[pix:theme|wyloguj_btn]]) top no-repeat;
-	height: 49px;
-	width: 146px;
-	text-align: left;
-	text-indent: 34px;
-}
-
-#menu_dosk a.log_in:hover,
-#menu_dosk a.log_out:hover {
-	background-position: bottom;
 }
 
 .loginbox, .loginbox.twocolumns .loginpanel, .loginbox .subcontent {
@@ -309,7 +286,7 @@ margin: 0px;
 width: 185px;
 }
 
-div.loginform #loginbtn , .buttonstyle{
+div.loginform #loginbtn {
 
 border: none;
 background: #fff url([[pix:theme|submit-button]])  center repeat-x;
@@ -445,6 +422,34 @@ div.links {
 }
 
 
+div.links a.kontakt {
+	float: right;
+	display: block;
+	width: 116px;
+	height: 40px;
+	background-image:  url([[pix:theme|kontakt]]);
+	background-position: top;
+	background-repeat: no-repeat;
+}
+
+div.links a.faq {
+	float: right;
+	display: block;
+	width: 118px;
+	height: 40px;
+	background-image:  url([[pix:theme|faq]]);
+	background-position: bottom;
+	background-repeat: no-repeat;
+}
+
+div.links a.kontakt:hover {
+	background-position: bottom;
+}
+
+
+div.links a.faq:hover {
+	background-position: top;
+}
 
 h1.title {
 	font-family: 'signika';
@@ -1024,50 +1029,4 @@ font-size: 12px;
 #page-kontakt #contact #temat.error2,
 #page-kontakt #contact input.error2 {
 	border: 2px solid #ff0000 !important;
-}
-
-#page-footer div.links a,
-#page-footer div.links a:link,
-#page-footer div.links a:visited {
-color: #000;
-font-family: signika;
-font-size: 13px;
-line-height: 50px;
-}
-
-#page-footer div.links a.kontakt {
-	float: right;
-	display: block;
-	width: 115px;
-	height: 40px;
-	background-image:  url([[pix:theme|kontakt]]);
-	background-position: top;
-	background-repeat: no-repeat;
-	font-family: signika;
-	color: #000;
-	text-indent: 31px;
-}
-
-#page-footer div.links a.faq {
-	float: right;
-	display: block;
-	width: 115px;
-	height: 40px;
-	background-image:  url([[pix:theme|faq]]);
-	background-position: top;
-	background-repeat: no-repeat;
-	font-family: signika;
-	color: #000;
-	text-indent: 22px;
-}
-
-#page-footer div.links a.kontakt:hover {
-	background-position: bottom;
-	color: #fff;
-}
-
-
-#page-footer div.links a.faq:hover {
-	background-position: bottom;
-	color: #fff;
 }

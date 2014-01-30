@@ -256,7 +256,7 @@ function mnet_server_dispatch($payload) {
 
     // $method is something like: "mod/forum/lib.php/forum_add_instance"
     // $params is an array of parameters. A parameter might itself be an array.
-    
+
     // Whitelist characters that are permitted in a method name
     // The method name must not begin with a / - avoid absolute paths
     // A dot character . is only allowed in the filename, i.e. something.php
@@ -325,13 +325,12 @@ function mnet_server_dispatch($payload) {
     ////////////////////////////////////// DANGEROUS
         } else if ('dangerous' == $CFG->mnet_dispatcher_mode && $remoteclient->plaintext_is_ok()) {
             $functionname = array_pop($callstack);
-            
 
             $filename = clean_param(implode('/',$callstack), PARAM_PATH);
             if (0 == preg_match("/php$/", $filename)) {
                 // Filename doesn't end in 'php'; possible attack?
                 // Generate error response - unable to locate function
-                throw new mnet_server_exception(70120, 'nosuchfunction');
+                throw new mnet_server_exception(7012, 'nosuchfunction');
             }
 
             // The call stack holds the path to any include file
@@ -342,8 +341,7 @@ function mnet_server_dispatch($payload) {
             return;
         }
     }
-
-    throw new mnet_server_exception(70121, 'nosuchfunction');
+    throw new mnet_server_exception(7012, 'nosuchfunction');
 }
 
 /**
@@ -592,7 +590,7 @@ function mnet_setup_dummy_method($method, $callstack, $rpcrecord) {
     $remoteclient = get_mnet_remote_client();
     // verify that the callpath in the stack matches our records
     // callstack will look like array('mod', 'forum', 'lib.php', 'forum_add_instance');
-    $path = get_plugin_directory($rpcrecord->plugintype, $rpcrecord->pluginname);
+    $path = core_component::get_plugin_directory($rpcrecord->plugintype, $rpcrecord->pluginname);
     $path = substr($path, strlen($CFG->dirroot)+1); // this is a bit hacky and fragile, it is not guaranteed that plugins are in dirroot
     array_pop($callstack);
     $providedpath =  implode('/', $callstack);

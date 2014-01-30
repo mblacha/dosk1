@@ -183,7 +183,7 @@ class cache_factory {
      */
     public function create_cache_from_definition($component, $area, array $identifiers = array(), $aggregate = null) {
         $definitionname = $component.'/'.$area;
-        if (array_key_exists($definitionname, $this->cachesfromdefinitions)) {
+        if (isset($this->cachesfromdefinitions[$definitionname])) {
             $cache = $this->cachesfromdefinitions[$definitionname];
             $cache->set_identifiers($identifiers);
             return $cache;
@@ -235,14 +235,14 @@ class cache_factory {
      */
     public function create_cache(cache_definition $definition) {
         $class = $definition->get_cache_class();
-        if ($this->is_initialising()) {
-            // Do nothing we just want the dummy store.
-            $stores = array();
-        } else {
-            $stores = cache_helper::get_cache_stores($definition);
+        $stores = cache_helper::get_stores_suitable_for_definition($definition);
+        foreach ($stores as $key => $store) {
+            if (!$store::are_requirements_met()) {
+                unset($stores[$key]);
+            }
         }
         if (count($stores) === 0) {
-            // Hmm no stores, better provide a dummy store to mimick functionality. The dev will be none the wiser.
+            // Hmm still no stores, better provide a dummy store to mimic functionality. The dev will be none the wiser.
             $stores[] = $this->create_dummy_store($definition);
         }
         $loader = null;
@@ -258,7 +258,7 @@ class cache_factory {
     /**
      * Creates a store instance given its name and configuration.
      *
-     * If the store has already been instantiated then the original objetc will be returned. (reused)
+     * If the store has already been instantiated then the original object will be returned. (reused)
      *
      * @param string $name The name of the store (must be unique remember)
      * @param array $details
@@ -272,8 +272,9 @@ class cache_factory {
             $store = new $class($details['name'], $details['configuration']);
             $this->stores[$name] = $store;
         }
+        /* @var cache_store $store */
         $store = $this->stores[$name];
-        if (!$store->is_ready() || !$store->is_supported_mode($definition->get_mode())) {
+        if (!$store::are_requirements_met() || !$store->is_ready() || !$store->is_supported_mode($definition->get_mode())) {
             return false;
         }
         // We always create a clone of the original store.
@@ -307,7 +308,7 @@ class cache_factory {
 
     /**
      * Returns the cache instances that have been used within this request.
-     * @since 2.5.3
+     * @since 2.6
      * @return array
      */
     public function get_caches_in_use() {
@@ -385,7 +386,7 @@ class cache_factory {
         if ($aggregate) {
             $id .= '::'.$aggregate;
         }
-        if (!array_key_exists($id, $this->definitions)) {
+        if (!isset($this->definitions[$id])) {
             // This is the first time this definition has been requested.
             if ($this->is_initialising()) {
                 // We're initialising the cache right now. Don't try to create another config instance.

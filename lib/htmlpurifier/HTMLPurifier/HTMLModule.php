@@ -128,7 +128,6 @@ class HTMLPurifier_HTMLModule
      *         can set advanced parameters
      */
     public function addElement($element, $type, $contents, $attr_includes = array(), $attr = array()) {
-    	echo $type;
         $this->elements[] = $element;
         // parse content_model
         list($content_model_type, $content_model) = $this->parseContents($contents);

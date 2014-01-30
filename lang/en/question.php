@@ -36,8 +36,6 @@ $string['cannotcreate'] = 'Could not create new entry in question_attempts table
 $string['cannotcreatepath'] = 'Cannot create path: {$a}';
 $string['cannotdeletebehaviourinuse'] = 'You cannot delete the behaviour \'{$a}\'. It is used by question attempts.';
 $string['cannotdeletecate'] = 'You can\'t delete that category it is the default category for this context.';
-$string['cannotdeletemissingbehaviour'] = 'You cannot uninstall the missing behaviour. It is required by the system.';
-$string['cannotdeletemissingqtype'] = 'You cannot uninstall the missing question type. It is needed by the system.';
 $string['cannotdeleteneededbehaviour'] = 'Cannot delete the question behaviour \'{$a}\'. There are other behaviours installed that rely on it.';
 $string['cannotdeleteqtypeinuse'] = 'You cannot delete the question type \'{$a}\'. There are questions of this type in the question bank.';
 $string['cannotdeleteqtypeneeded'] = 'You cannot delete the question type \'{$a}\'. There are other question types installed that rely on it.';
@@ -92,13 +90,10 @@ $string['cwrqpfsnoprob'] = 'No question categories in your site are affected by 
 $string['defaultfor'] = 'Default for {$a}';
 $string['defaultinfofor'] = 'The default category for questions shared in context \'{$a}\'.';
 $string['defaultmarkmustbepositive'] = 'The default mark must be positive.';
-$string['deletebehaviourareyousure'] = 'Delete behaviour {$a}: are you sure?';
-$string['deletebehaviourareyousuremessage'] = 'You are about to completely delete the question behaviour {$a}. This will completely delete everything in the database associated with this question behaviour. Are you SURE you want to continue?';
 $string['deletecoursecategorywithquestions'] = 'There are questions in the question bank associated with this course category. If you proceed, they will be deleted. You may wish to move them first, using the question bank interface.';
-$string['deleteqtypeareyousure'] = 'Delete question type {$a}: are you sure?';
-$string['deleteqtypeareyousuremessage'] = 'You are about to completely delete the question type {$a}. This will completely delete everything in the database associated with this question type. Are you SURE you want to continue?';
 $string['deletequestioncheck'] = 'Are you absolutely sure you want to delete \'{$a}\'?';
-$string['deletequestionscheck'] = 'Are you absolutely sure you want to delete the following questions?<br /><br />{$a}';
+$string['deletequestionscheck'] = '<p>Are you absolutely sure you want to delete the following questions?</p>
+<p>{$a}</p>';
 $string['deletingbehaviour'] = 'Deleting question behaviour \'{$a}\'';
 $string['deletingqtype'] = 'Deleting question type \'{$a}\'';
 $string['didnotmatchanyanswer'] = '[Did not match any answer]';
@@ -254,8 +249,6 @@ $string['permissionmove'] = 'Move this question';
 $string['permissionsaveasnew'] = 'Save this as a new question';
 $string['permissionto'] = 'You have permission to :';
 $string['published'] = 'shared';
-$string['qbehaviourdeletefiles'] = 'All data associated with the question behaviour \'{$a->behaviour}\' has been deleted from the database. To complete the deletion (and to prevent the behaviour from re-installing itself), you should now delete this directory from your server: {$a->directory}';
-$string['qtypedeletefiles'] = 'All data associated with the question type \'{$a->qtype}\' has been deleted from the database. To complete the deletion (and to prevent the question type from re-installing itself), you should now delete this directory from your server: {$a->directory}';
 $string['qtypeveryshort'] = 'T';
 $string['questionaffected'] = '<a href="{$a->qurl}">Question "{$a->name}" ({$a->qtype})</a> is in this question category but is also being used in <a href="{$a->qurl}">quiz "{$a->quizname}"</a> in another course "{$a->coursename}".';
 $string['questionbank'] = 'Question bank';
@@ -347,7 +340,7 @@ Alternatively, you may wish for students to submit each question as they go alon
 Those are probably the two most commonly used modes of behaviour. ';
 $string['importfromcoursefiles'] = '... or choose a course file to import.';
 $string['importfromupload'] = 'Select a file to upload ...';
-$string['includesubcategories'] = 'Also show questions from sub-categories';
+$string['includesubcategories'] = 'Also show questions from subcategories';
 $string['incorrect'] = 'Incorrect';
 $string['incorrectfeedback'] = 'For any incorrect response';
 $string['incorrectfeedbackdefault'] = 'Your answer is incorrect.';
@@ -375,7 +368,7 @@ $string['partiallycorrect'] = 'Partially correct';
 $string['partiallycorrectfeedback'] = 'For any partially correct response';
 $string['partiallycorrectfeedbackdefault'] = 'Your answer is partially correct.';
 $string['penaltyforeachincorrecttry'] = 'Penalty for each incorrect try';
-$string['penaltyforeachincorrecttry_help'] = 'When you run your questions using the \'Interactive with multiple tries\' or \'Adaptive mode\' behaviour, so that the the student will have several tries to get the question right, then this option controls how much they are penalised for each incorrect try.
+$string['penaltyforeachincorrecttry_help'] = 'When questions are run using the \'Interactive with multiple tries\' or \'Adaptive mode\' behaviour, so that the student will have several tries to get the question right, then this option controls how much they are penalised for each incorrect try.
 
 The penalty is a proportion of the total question grade, so if the question is worth three marks, and the penalty is 0.3333333, then the student will score 3 if they get the question right first time, 2 if they get it right second try, and 1 of they get it right on the third try.';
 $string['previewquestion'] = 'Preview question: {$a}';
@@ -421,6 +414,7 @@ $string['submitted'] = 'Submit: {$a}';
 $string['technicalinfo'] = 'Technical information';
 $string['technicalinfo_help'] = 'This technical information is probably only useful for developers working on new question types. It may also be helpful when trying to diagnose problems with questions.';
 $string['technicalinfominfraction'] = 'Minimum fraction: {$a}';
+$string['technicalinfomaxfraction'] = 'Maximum fraction: {$a}';
 $string['technicalinfoquestionsummary'] = 'Question summary: {$a}';
 $string['technicalinforightsummary'] = 'Right answer summary: {$a}';
 $string['technicalinfostate'] = 'Question state: {$a}';

@@ -274,7 +274,7 @@ class mnetservice_enrol {
         if ($request->send($peer)) {
             $list = array();
             $response = $request->response;
-            
+
             // prepare a table mapping usernames of our users to their ids
             $usernames = array();
             foreach ($response as $unused => $remote) {
@@ -318,7 +318,7 @@ class mnetservice_enrol {
                 $enrolment->rolename        = $remote['name']; // $remote['shortname'] not used
                 $enrolment->enroltime       = $remote['timemodified'];
                 $enrolment->enroltype       = $remote['enrol'];
-                
+
                 $current = $DB->get_record('mnetservice_enrol_enrolments', array('hostid'=>$enrolment->hostid, 'userid'=>$enrolment->userid,
                                        'remotecourseid'=>$enrolment->remotecourseid, 'enroltype'=>$enrolment->enroltype), 'id, enroltime');
                 if (empty($current)) {
@@ -332,7 +332,7 @@ class mnetservice_enrol {
 
                 $list[$enrolment->id] = $enrolment;
             }
-           
+
             // prune stale enrolment records
             if (empty($list)) {
                 $DB->delete_records('mnetservice_enrol_enrolments', array('hostid'=>$mnethostid, 'remotecourseid'=>$remotecourseid));
@@ -370,19 +370,11 @@ class mnetservice_enrol {
 
         $peer = new mnet_peer();
         $peer->set_id($remotecourse->hostid);
-    
+
         $request = new mnet_xmlrpc_client();
         $request->set_method('enrol/mnet/enrol.php/enrol_user');
         $request->add_param(mnet_strip_user((array)$user, mnet_fields_to_send($peer)));
         $request->add_param($remotecourse->remoteid);
-        //mblacha start
-        $role      = (isset($user->role)) ? $user->role : '';
-        $timestart = (isset($user->timestart)) ? $user->timestart : 0;
-        $timeend   = (isset($user->timeend)) ? $user->timeend : 0;            
-        $request->add_param($role);
-        $request->add_param($timestart);
-        $request->add_param($timeend);
-		//mblacha end     
 
         if ($request->send($peer) === true) {
             if ($request->response === true) {
@@ -392,30 +384,10 @@ class mnetservice_enrol {
                 $enrolment->userid          = $user->id;
                 $enrolment->remotecourseid  = $remotecourse->remoteid;
                 $enrolment->enroltype       = 'mnet';
-                //mblacha start
-                $enrolment->timestart       = $timestart;
-                $enrolment->timeend         = $timeend;
-                $enrolment->rolename        = $role;
-                //mblacha end
-                //$enrolment->enroltime not known now, must be re-fetched
-                
-                /*
-                 * update mblacha
-                 * cel: podczas zmiany zakresu czasu zapisu na kurs,nie dodajemy nowego rekordu do bazy
-                 * tylko modyfikujemy obecny
-                 */
-                $current = $DB->get_record('mnetservice_enrol_enrolments', array('hostid'=>$enrolment->hostid, 'userid'=>$enrolment->userid,
-                		'remotecourseid'=>$enrolment->remotecourseid, 'enroltype'=>$enrolment->enroltype), 'id, enroltime');
-                if (empty($current)) {
-                	$enrolment->id = $DB->insert_record('mnetservice_enrol_enrolments', $enrolment);                   	
-                } else {
-                	$enrolment->id = $current->id;
-                	//if ($current->enroltime != $enrolment->enroltime) {
-                		$DB->update_record('mnetservice_enrol_enrolments', $enrolment);
-                	//}                	
-                }     
-                //mblacha end           
-                return true;            
+                // $enrolment->rolename not known now, must be re-fetched
+                // $enrolment->enroltime not known now, must be re-fetched
+                $DB->insert_record('mnetservice_enrol_enrolments', $enrolment);
+                return true;
 
             } else {
                 return serialize(array('invalid response: '.print_r($request->response, true)));
@@ -580,7 +552,7 @@ class mnetservice_enrol_potential_users_selector extends user_selector_base {
     public function find_users($search) {
         global $CFG, $DB;
 
-        $systemcontext = get_system_context();
+        $systemcontext = context_system::instance();
         $userids = get_users_by_capability($systemcontext, 'moodle/site:mnetlogintoremote', 'u.id');
 
         if (empty($userids)) {

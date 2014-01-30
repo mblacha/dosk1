@@ -4,7 +4,6 @@
 
     require_once('../config.php');
     require_once('lib.php');
-    require_once($CFG->dirroot.'/mod/forum/lib.php');
     require_once($CFG->libdir.'/conditionlib.php');
     require_once($CFG->libdir.'/completionlib.php');
 
@@ -50,7 +49,7 @@
     // Prevent caching of this page to stop confusion when changing page after making AJAX changes
     $PAGE->set_cacheable(false);
 
-    preload_course_contexts($course->id);
+    context_helper::preload_course($course->id);
     $context = context_course::instance($course->id, MUST_EXIST);
 
     // Remove any switched roles before checking login
@@ -220,8 +219,10 @@
         redirect($CFG->wwwroot .'/');
     }
 
+    $ajaxenabled = ajaxenabled();
+
     $completion = new completion_info($course);
-    if ($completion->is_enabled() && ajaxenabled()) {
+    if ($completion->is_enabled() && $ajaxenabled) {
         $PAGE->requires->string_for_js('completion-title-manual-y', 'completion');
         $PAGE->requires->string_for_js('completion-title-manual-n', 'completion');
         $PAGE->requires->string_for_js('completion-alt-manual-y', 'completion');
@@ -239,10 +240,18 @@
     }
 
     $PAGE->set_title(get_string('course') . ': ' . $course->fullname);
+    // If viewing a section, make the title more specific
+    if ($section and $section > 0 and course_format_uses_sections($course->format)) {
+        // Get section details and check it exists.
+        $newtitle = $PAGE->title.', '.get_string('sectionname', "format_$course->format").': '.
+            get_section_name($course, $section);
+        $PAGE->set_title($newtitle);
+    }
+
     $PAGE->set_heading($course->fullname);
     echo $OUTPUT->header();
 
-    if ($completion->is_enabled() && ajaxenabled()) {
+    if ($completion->is_enabled() && $ajaxenabled) {
         // This value tracks whether there has been a dynamic change to the page.
         // It is used so that if a user does this - (a) set some tickmarks, (b)
         // go to another page, (c) clicks Back button - the page will

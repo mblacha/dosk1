@@ -39,16 +39,15 @@ echo $OUTPUT->doctype() ?>
 		  	  <a href="http://dobreosk.pl/" title="Strona główna">	<img src="<?php echo $OUTPUT->pix_url('home', 'theme'); ?>" alt="" >Platforma szkoleniowa dla OSK </a>
 			</div>	
 			
-		  		<div id="menu_dosk">
+			<div id="menu_dosk">
 				<a href="http://dobreosk.pl/pkk">PKK</a>
 				<a href="http://dobreosk.pl/o-platformie">O platformie</a>
 				<a href="http://dobreosk.pl/regulamin">Regulamin</a>
 				<?php
 				if(!$USER->id){
-				echo '<a href="http://dobreosk.pl/auth/int_keygen/" class="log_in">Zaloguj</a>';
+				echo '<a href="http://dobreosk.pl/auth/int_keygen/">Logowanie</a>';
 				} else {
 				echo '<a href="'.$CFG->wwwroot.'/user/profile.php?id='.$USER->id.'">Twój profil</a>';
-				echo '<a href="'.$CFG->wwwroot.'/login/logout.php?sesskey='.sesskey().'" class="log_out">Wyloguj</a>';
 				}
 				?>
 				

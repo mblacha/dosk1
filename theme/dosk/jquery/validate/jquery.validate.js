@@ -610,7 +610,7 @@ $.extend($.validator, {
 				// title is never undefined, so handle empty string as undefined
 				!this.settings.ignoreTitle && element.title || undefined,
 				$.validator.messages[method],
-				"<strong>Pole wymagane</strong>";//"<strong>Warning: No message defined for " + element.name + "</strong>"
+				"<strong>Warning: No message defined for " + element.name + "</strong>"
 			);
 		},
 

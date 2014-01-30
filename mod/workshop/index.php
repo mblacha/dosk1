@@ -48,8 +48,8 @@ echo $OUTPUT->header();
 /// Get all the appropriate data
 
 if (! $workshops = get_all_instances_in_course('workshop', $course)) {
-    echo $OUTPUT->heading(get_string('noworkshops', 'workshop'), 2);
-    echo $OUTPUT->continue_button(new moodle_url('/course/view.php', array('id' => $course->id)));
+    echo $OUTPUT->heading(get_string('modulenameplural', 'workshop'));
+    notice(get_string('noworkshops', 'workshop'), new moodle_url('/course/view.php', array('id' => $course->id)));
     echo $OUTPUT->footer();
     die();
 }
@@ -57,11 +57,11 @@ if (! $workshops = get_all_instances_in_course('workshop', $course)) {
 $usesections = course_format_uses_sections($course->format);
 
 $timenow        = time();
-$strsectionname = get_string('sectionname', 'format_'.$course->format);
 $strname        = get_string('name');
 $table          = new html_table();
 
 if ($usesections) {
+    $strsectionname = get_string('sectionname', 'format_'.$course->format);
     $table->head  = array ($strsectionname, $strname);
     $table->align = array ('center', 'left');
 } else {
@@ -84,7 +84,6 @@ foreach ($workshops as $workshop) {
         $table->data[] = array($link);
     }
 }
-
-echo $OUTPUT->heading(get_string('modulenameplural', 'workshop'), 2);
+echo $OUTPUT->heading(get_string('modulenameplural', 'workshop'), 3);
 echo html_writer::table($table);
 echo $OUTPUT->footer();

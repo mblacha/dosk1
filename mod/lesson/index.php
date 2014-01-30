@@ -53,6 +53,7 @@ $PAGE->navbar->add($strlessons);
 $PAGE->set_title("$course->shortname: $strlessons");
 $PAGE->set_heading($course->fullname);
 echo $OUTPUT->header();
+echo $OUTPUT->heading($strlessons, 2);
 
 /// Get all the appropriate data
 
@@ -66,7 +67,6 @@ $usesections = course_format_uses_sections($course->format);
 /// Print the list of instances (your module will probably extend this)
 
 $timenow = time();
-$strsectionname  = get_string('sectionname', 'format_'.$course->format);
 $strname  = get_string("name");
 $strgrade  = get_string("grade");
 $strdeadline  = get_string("deadline", "lesson");
@@ -74,6 +74,7 @@ $strnodeadline = get_string("nodeadline", "lesson");
 $table = new html_table();
 
 if ($usesections) {
+    $strsectionname = get_string('sectionname', 'format_'.$course->format);
     $table->head  = array ($strsectionname, $strname, $strgrade, $strdeadline);
     $table->align = array ("center", "left", "center", "center");
 } else {
