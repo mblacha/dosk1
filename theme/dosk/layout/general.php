@@ -279,7 +279,7 @@ echo $OUTPUT->doctype() ?>
 	
 			 
 	 <?php
-	 echo $OUTPUT->login_info();
+	 //echo $OUTPUT->login_info();
 ?>
 	<div class="links">	
 	 			<a href="http://dobreosk.pl/faq" class="faq">Faq</a>
